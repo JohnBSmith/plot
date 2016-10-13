@@ -1,0 +1,741 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="main.css">
+  <title>Function grapher manual</title>
+</head>
+<body>
+
+<p><a href="docDe.htm">DE</a> | <a href="home.htm">Home</a>
+</p>
+<h1>Function grapher manual</h1>
+
+<h2 id="toc">Table of contents</h2>
+<ul>
+<li><a href="#Constants">Constants</a>
+<li><a href="#Functions">List of functions</a>
+<li><a href="#CFun">Complex functions</a>
+<li><a href="#Operators">Operators</a>
+<li><a href="#Syntax">Syntax and semantics</a>
+<li><a href="#Graphers">The graphers in detail</a>
+<li><a href="#Examples">Examples</a>
+<li><a href="#Advanced">Advanced</a>
+</ul>
+
+<h2 id="Constants">
+Constants</h2>
+<pre>
+e......Euler's number
+pi.....Circle constant
+gc.....Euler-Mascheroni constant
+deg....pi/180
+</pre>
+
+<h2 id="Functions">
+List of functions</h2>
+<pre>
+<b>Basic functions</b>
+abs(x)........absolute value
+sgn(x)........signum function
+sqrt(x).......square root
+root(n,x).....nth root
+floor(x)......rounds x down
+ceil(x).......rounds x up
+rd(x).........rounded value
+frac(x).......fractional part
+max(a,b)......maximum
+min(a,b)......minimum
+mod(x,m)......modulo funktion
+H(x)..........unit step function
+
+exp(x)........natural exponential function
+ln(x).........natural logarithm
+lg(x).........decadic logarithm
+ld(x).........logarithm to base two
+log(x,b)......logarithm to base b
+
+<b>Trigonometric</b>
+sin(x)........sine
+cos(x)........cosine
+tan(x)........tangent
+cot(x)........cotangent
+sec(x)........secant
+csc(x)........cosecant
+
+asin(x).......arc sine
+acos(x).......arc cosine
+atan(x).......arc tangent
+acot(x).......arc cotangent
+asec(x).......arc secant
+acsc(x).......arc cosecant
+
+gd(x).........Gudermann function
+hypot(x,y)....length of the coordinate vector (x,y)
+angle(x,y)....angle of the coordinate vector (x,y)
+
+<b>Hyperbolic</b>
+sinh(x).......sine hyperbolicus
+cosh(x).......cosine hyperbolicus
+tanh(x).......tangent hyperbolicus
+coth(x).......cotangent hyperbolicus
+sech(x).......secant hyperbolicus
+csch(x).......cosecant hyperbolicus
+
+asinh(x)......area sine hyperbolicus
+acosh(x)......area cosine hyperbolicus
+atanh(x)......area tangent hyperbolicus
+acoth(x)......area cotangent hyperbolicus
+asech(x)......area secant hyperbolicus
+acsch(x)......area cosecant hyperbolicus
+
+<b>Wave forms</b>
+twave(x,p)....triangle wave, p-periodic
+ptwave(x,p)...positive triangle wave, p-periodic
+sqwave(x,p)...square wave, p-periodic
+psqwave(x,p)..positive square wave, p-periodic
+stwave(x,p)...sawtooth wave, p-periodic
+pstwave(x,p)..positive sawtooth wave, p-periodic
+
+<b>Numerical analysis</b>
+diff(f,x).....derivative of f at x
+diff(f,x,2)...second derivative of f at x
+diff(f,x,n)...nth derivative of f at x
+int(f,0,x)....integral(from 0 to x) f(t) dt
+int(f,0,x,n)..integration with n steps
+pow(f,n,x)....composition of function f with itself
+sum(f,a,b)....sum(k=a to b) f(k)
+prod(f,a,b)...product(k=a to b) f(k)
+rand(a,b).....random number in the interval [a,b)
+inv(f,x)......inverse function f^(-1)(x)
+inv(f,x,a,b)..f^(-1)(x) for f defined on [a,b]
+
+<b>Enhancement functions</b>
+list(a1,...,an), [a1,...,an]
+..............constructs a list from the values a1,...,an
+get(a,i)......element number i of the list a
+size(a).......number of elements in the list a
+cat(a,b)......concatenates the lists a and b
+range(a,b)....constructs the list [a,a+1,...,b]
+range(a,b,d)..constructs the list [a,a+d,a+2d,...]
+next(a).......cyclically picks an element from the list a
+rand(a).......randomly picks an element from the list a
+sum(a)........sum of all elements in the list a
+prod(a).......product of all elements in the list a
+max(a)........maximum of all elements in the list a
+min(a)........minimum of all elements in the list a
+rev(a)........reversed list
+ipp(a)........interpolation polynomial, a=[[x0,y0],...,[xn,yn]]
+fn(a).........piecewise linear interpolation
+map(f,a)......applys the function f to all elements in a
+filter(f,a)...filters elementes from the list a
+reduce(f,a)...reduces a with f(x,y)
+compose(a)....composition of all functions in the list a
+count(f,a)....counts how often f(x) for x in a is true
+forall(f,a)...f(x) is true for all x in a
+exists(f,a)...f(x) is true for any x in a
+table(f,a)....lookup table of f for the list a
+apply(f,x)....application of f to x
+if(c,a,b).....if c then a else b
+not(a)........logical negation
+
+<b>Gamma and related</b>
+fac(x)........factorial
+gamma(x)......gamma function
+digamma(x)....digamma function
+pgamma(n,x)...polygamma function
+B(a,b)........beta function
+gamma(s,x)....lower incomplete gamma function
+Gamma(s,x)....upper incomplete gamma function
+B(x,a,b)......incomplete beta function B[x](a,b)
+I(x,a,b)......B(x,a,b)/B(a,b)
+G(x)..........Barnes G-function
+hyperK(x).....K-function
+
+<b>Combinatorical functions</b>
+bc(n,k).......binomial coefficient
+ff(n,k).......falling factorial
+rf(n,k).......raising factorial
+bracket(n,k)..Stirling number of the first kind
+brace(n,k)....Stirling number of the second kind
+
+<b>Elliptic integrals and related</b>
+K(m)..........complete elliptic integral K(m=k^2)
+E(m)..........complete elliptic integral E(m=k^2)
+F(phi,m)......incomplete elliptic integral F(phi,m=k^2)
+E(phi,m)......incomplete elliptic integral E(phi,m=k^2)
+Pi(phi,n,m)...incomplete elliptic integral Pi(phi,n,m=k^2)
+RF(x,y,z).....Carlson symmetric form RF(x,y,z)
+RJ(x,y,z,p)...Carlson symmetric form RJ(x,y,z,p)
+RC(x,y).......shorthand for RF(x,y,y)
+RD(x,y,z).....shorthand for RJ(x,y,z,z)
+agm(a,b)......arithmetic-geometric mean
+magm(a,b).....modified arithmetic-geometric mean
+
+<b>Antiderivatives</b>
+Ei(x).........exponential integral
+En(n,x).......exponential integral E[n](x)
+li(x).........integral logarithm
+Li(x).........integral logarithm with offset li(2)
+Si(x).........sine integral
+Ci(x).........cosine integral
+
+<b>Bessel and related</b>
+BJ(a,x).......Bessel function J[a](x)
+BY(a,x).......Bessel function Y[a](x)
+Bj(a,x).......spherical Bessel function j[a](x)
+By(a,x).......spherical Bessel function y[a](x)
+BI(a,x).......modified Bessel function I[a](x)
+BK(a,x).......modified Bessel function K[a](x)
+Ai(x).........Airy function Ai(x)
+Bi(x).........Airy function Bi(x)
+
+<b>Hypergeometric functions</b>
+F([a1,...,am],[b1,...,bn],x)
+..............hypergeometric function
+M(a,b,x)......confluent hypergeometric function M(a,b,x)
+U(a,b,x)......confluent hypergeometric function U(a,b,x)
+
+<b>Zeta and related</b>
+zeta(s).......zeta function
+zeta(s,a).....Hurzwitz zeta function
+Phi(x,s,a)....Lerch transcendent
+Li(s,x).......polylogarithm Li[s](x)
+B(k)..........Bernoulli number, B(1)=+1/2
+Bm(k).........Bernoulli number, Bm(1)=-1/2
+
+<b>Polynomial functions</b>
+PP(n,a,x).....Legendre polynomial P[n,a](x)
+PL(n,a,x).....Laguerre polynomial L[n,a](x)
+PH(n,x).......Hermite polynomial H[n](x)
+PT(n,x).......Chebyshev polynomial T[n](x)
+PU(n,x).......Chebyshev polynomial U[n](x)
+
+<b>Fourier analysis</b>
+fa(f,i,j).....Fourier coefficients a[i] upto a[j]
+fb(f,i,j).....Fourier-coefficients b[i] upto b[j]
+fs(x,a0,a,b)..Fourier series, a=[a1,a2,...], b=[b1,b2,...]
+fs(x,a0,a)....amplitude-phase form(cos), a=[[A1,phi1],[A2,phi2],...]
+Fs(f,x).......sine transform, x in Hz
+Fc(f,x).......cosine transform, x in Hz
+comb(x,a,p)...Dirac comb of sharpness a und period p
+
+<b>Functional analysis</b>
+sinc(x).......cardinal sine: sin(pi*x)/(pi*x)
+delta(x,a)....Dirac delta function
+L(f,x)........Laplace transform
+E(a,b,x)......Mittag Leffler function
+D(f,x,r)......fractional derivative (D^r)(f)(x)
+J(f,a,x,r)....Riemann-Liouville integral (J[a]^r)(f)(x)
+J2(f,a,x,r)...Riemann-Liouville integral, alternative algorithm
+
+<b>Other functions</b>
+W(x)..........Lambert W-function, upper branch
+Wm1(x)........Lambert W-function, lower branch
+
+<b>Number theoretic functions</b>
+pm(x,n,m).....modular power
+gcd(a,b)......greatest common divisor
+lcm(a,b)......least common multiple
+isprime(n)....prime number test
+factor(n).....prime number factorization
+pcf(n)........prime number counting function pi(n)
+phi(n)........Euler's totient function
+lambda(n).....Carmichael function
+sigma(n,k)....divisor function sigma[k](n)
+
+<b>Statistical functions</b>
+erf(x)........error function
+norm(x).......cumulative standard normal distribution
+mean(a).......arithmetic mean of the elements of a
+sd(a).........standard deviation of the elements of a
+cdf(a,x)......CDF for the random numbers in a
+pmf(a,x)......PMF, a is a list of integer numbers
+
+pmfB(n,p,k)...binomial distribution, PMF
+cdfB(n,p,k)...binomial distribution, CDF
+pmfG(p,k).....geometric distribution, PMF
+cdfG(p,k).....geometric distribution, CDF
+pmfH(N,K,n,k)...hypergeometric distribution, PMF
+cdfH(N,K,n,k)...hypergeometric distribution, CDF
+pmfP(lambda,k)...Poisson distribution, PMF
+cdfP(lambda,k)...Poisson distribution, CDF
+pmfLog(p,k)...logarithmic distribution, PMF
+cdfLog(p,k)...logarithmic distribution, CDF
+
+pdfN(mu,sigma,x)...normal distribution, PDF
+cdfN(mu,sigma,x)...normal distribution, CDF
+pdfLogN(mu,sigma,x)...log-normal distribution, PDF
+cdfLogN(mu,sigma,x)...log-normal distribution, CDF
+pdfExp(lambda,x)...exponential distribution, PDF, E=1/lambda
+cdfExp(lambda,x)...exponential distribution, CDF, E=1/lambda
+pdfst(n,x)....student's t-distribution, PDF
+cdfst(n,x)....student's t-distribution, CDF
+pdfF(m,n,x)...Fisher distribution, PDF
+cdfF(m,n,x)...Fisher distribution, CDF
+pdfW(a,b,x)...Weibull distribution, PDF, E=b*gamma(1+1/a)
+cdfW(a,b,x)...Weibull distribution, CDF, E=b*gamma(1+1/a)
+pdfGamma(b,p,x)...Gamma distribution, PDF, E=p/b
+cdfGamma(b,p,x)...Gamma distribution, CDF, E=p/b
+pdfBeta(p,q,x)...Beta distribution, PDF
+cdfBeta(p,q,x)...Beta distribution, CDF
+</pre>
+
+<h2 id="CFun">
+Complex functions</h2>
+
+<pre>
+<b>Basic functions</b>
+re(z).........real part
+im(z).........imaginary part
+conj(z).......conjugation
+arg(z)........phase
+abs(z)........absolute value
+sgn(z)........signum function
+sqrt(z).......square root
+root(n,z).....nth root
+exp(z)........natural exponential function
+ln(z).........natural logarithm
+lg(z).........decadic logarithm
+log(z,b)......logarithm to base b
+
+<b>Trigonometric</b>
+sin(z)........sine
+cos(z)........cosine
+tan(z)........tangent
+cot(z)........cotangent
+
+asin(z).......arc sine
+acos(z).......arc cosine
+atan(z).......arc tangent
+acot(z).......arc cotangent
+
+<b>Hyperbolic</b>
+sinh(z).......sine hyperbolicus
+cosh(z).......cosine hyperbolicus
+tanh(z).......tangent hyperbolicus
+coth(z).......cotangent hyperbolicus
+
+asinh(z)......area sine hyperbolicus
+acosh(z)......area cosine hyperbolicus
+atanh(z)......area tangent hyperbolicus
+acoth(z)......area cotangent hyperbolicus
+
+<b>Complex analysis</b>
+diff(f,z).....complex derivative
+diff(f,z,n)...nth complex derivative
+int(f,a,b)....integral(from a to b) f(t) dt
+cint(f,g).....contour integral(from g(0) to g(1)) f(z) dz
+vint(f,a).....contour integral(from get(a,1) to get(a,n)) f(z) dz
+
+<b>Gamma and related</b>
+fac(z)........factorial
+gamma(z)......gamma function
+digamma(z)....digamma function
+gamma(s,z)....lower incomplete gamma function
+Gamma(s,z)....upper incomplete gamma function
+
+<b>Elliptic integrals and related</b>
+K(m)..........complete elliptic integral K(m=k^2)
+E(m)..........complete elliptic integral E(m=k^2)
+
+<b>Antiderivatives</b>
+erf(z)........error function
+Ei(z).........exponential integral
+En(n,z).......exponential integral E[n](z)
+
+<b>Zeta and related</b>
+zeta(s).......zeta function
+zeta(s,a).....Hurzwitz zeta function
+Phi(x,s,a)....Lerch transcendent
+B(k)..........Bernoulli number
+
+<b>Other</b>
+theta1(z,q)...theta function theta1(z,q)
+theta2(z,q)...theta function theta2(z,q)
+theta3(z,q)...theta function theta3(z,q)
+theta4(z,q)...theta function theta4(z,q)
+sn(z,k).......sinus amplitudinis
+cn(z,k).......cosinus amplitudinis
+dn(z,k).......delta amplitudinis
+</pre>
+
+
+<h2 id="Operators">
+Operators</h2>
+
+<pre>
+01 f\x.....f applied to x
+02 a^b.....a to the power of b
+03 +a......plus a
+03 -a......minus a
+04 a*b.....a times b
+04 a/b.....a divided by b
+04 a%b.....a modulo b
+05 a+b.....a plus b
+05 a-b.....a minus b
+06 a:b.....[a,a+1,...,b]
+07 a&lt;b.....if a is less than b then 1 else 0
+07 a&gt;b.....if a is greater than b then 1 else 0
+07 a&lt;=b....if a is less than or equal to b then 1 else 0
+07 a&gt;=b....if a is greater than or equal to b then 1 else 0
+08 a=b.....if abs(a-b)&lt;epsilon then 1 else 0
+08 a!=b....if abs(a-b)&gt;epsilon then 1 else 0
+09 a&amp;b.....a and b
+10 a|b.....a or b
+</pre>
+
+
+<h2 id="Syntax">
+Syntax and semantics</h2>
+<pre>
+Care should be taken of the following:
+
+* The decimal mark is a point.
+  (the sign which separates fractional part from integer part)
+* x to the power of 2 is written x^2.
+* In place of x^-1 you have to write x^(-1).
+* The power operator is left-associative.
+  That means a^b^c = (a^b)^c.
+* x/a/b means (x/a)/b.
+* In place of 2*x you can also write 2x.
+* In place of (x+2)*(x-2) you can also write (x+2)(x-2).
+* But in place of x(x-1) you have to write x*(x-1).
+* Omitting the multiplication sign in a*x and x*x is also
+  not allowed.
+
+If a hash sign (#) is written at the beginning of the input line,
+then the following function is defined, but not graphed.
+For example the follwing input is possible:
+  f(x) = # sin(x)
+  g(x) = f(2x)
+
+The notation {x| term of x} is used for the definition of anonymous
+functions. For example, the function which maps x to 2x is written
+{x|2x}, or alternatively {t|2t} or {u|2u}. This function can be
+applied to the variable x like a named function: {t|2t}(x). This is
+advantageous in certain cases. For example, the function
+  f(x) = 1+(x-2)+(x-2)^2/2+(x-2)^3/6
+can also be written as
+  f(x) = {x|1+x+x^2/2+x^3/6}(x-2).
+
+The derivative of x^2 can be stated as
+  f(x) = diff({t|t^2},x).
+An alternative formulation is
+  f(x) = x^2,
+  g(x) = diff(f,x).
+
+To draw f(x) = integral(from 0 to x) 2t dt,
+write f(x) = int({t|2t},0,x).
+
+The operator ":=" is used to assign a value to a variable.
+Instead of
+  f(x,y) = sin(sqrt(x^2+y^2))/sqrt(x^2+y^2)
+you may also write
+  f(x,y) = r:=sqrt(x^2+y^2), sin(r)/r.
+
+It is also possible to draw a bunch of functions at the same time.
+Examples:
+  f(x) = next([x,x^2,1/x])
+  f(x) = next([-2,-1,1,2])*sin(x)
+  f(x) = next(-4:4)*sin(x)
+If the graphs of the functions are not continuous,
+to make them continous increase the number of points.
+
+If a statement has to be evaluated only once, the statement has to
+appear behind a semicolon. For example, there is a difference between
+  f(x) = r:=rand(0,1), x+r
+and
+  f(x) = x+r; r:=rand(0,1).
+</pre>
+
+<h2 id="Graphers">
+The graphers in detail</h2>
+
+<pre>
+<b>Grapher for real functions</b>
+px: viewpoint, x-coordinate
+py: viewpoint, y-coordinate
+wx: width of the view
+wy: height of the view
+
+The x-interval of the view is
+  [px-wx, px+wx]
+and the y-interval is
+  [py-wy, py+wy].
+
+n: number of points in the interval
+  [px, px+wx]
+
+a: parameter
+d: distance (a:=a-d, a:=a+d)
+b: parameter
+d: distance (b:=b-d, b:=b+d)
+
+<b>Grapher for implicit functions</b>
+To draw two functions simultaneously, simply connect them with
+a logical OR. An example is
+  x*y=1 | y=x.
+Replacement of OR (|) with AND (&amp;) results in an equation system.
+It is also possible to draw inequalities, for example
+  abs(x)+abs(y)&lt;1.
+
+<b>Grapher for solutions of differential equations</b>
+Write y1 instead of y' and y2 instead of y'' and so on.
+
+<b>Grapher for systems of two differential equations</b>
+We want to study the damped oscillator wich is defined by the
+equation y''+0.2y'+sin(y)=0. Let v(x):=y'(x). Put in
+  y'(x)=v,
+  v'(x)=-0.2v-sin(y).
+Now choose v(y) (phase space) instead of y(x). Put in
+  x0=0,
+  y(x0)=-10:10,
+  v(x0)=0.
+
+<b>Grapher for sequences</b>
+Recursion is possible. Take the recursive definition
+  f(n) = if n=0 then 1 else 2f(n-1)
+as an example. This has to be written in the form
+  f(n) = if(n=0,1,2f(n-1)).
+In the calculator line it is written in the form
+  p:=fix({f,n|if(n=0,1,2f(n-1))}).
+The function fix will memoize the values. Define
+  fib:=fix({f,n|if(n=1|n=2,1,f(n-1)+f(n-2))}).
+Now fib(40) will be calculated efficiently. Otherwise
+the number of calculations would be in O(2^n).
+
+The function sum(f,a,b) can be used to define a series.
+The input for sum(from k=1 to n) 1/k is
+  f(n) = sum({k|1/k},1,n)
+or also
+  f(n) = 1/n,
+  g(n) = sum(f,1,n).
+
+<b>Grapher for complex valued functions</b>
+Let us take the function f(x) = exp(i*x) as an example.
+The real part is expressed with
+  f(x) = exp(i*x) or also with f(x) = re(exp(i*x)).
+Analogously the the imaginary part is
+  g(x) = im(exp(i*x))
+and the absolute value is
+  h(x) = abs(exp(i*x)).
+
+<b>Grapher for fractals</b>
+It is also possible to draw Julia sets.
+For example put in f(z)=z^2-1 and z0=c.
+r: out of bound radius
+n: maximum number of iterations
+</pre>
+
+<h2 id="Examples">
+Examples</h2>
+
+<pre>
+Tangent line:
+g(x) = diff(f,a)(x-a)+f(a)
+
+Normal line:
+h(x) = -1/diff(f,a)(x-a)+f(a)
+
+Restriction of f to the interval (0,1):
+g(x) = if(0&lt;x&amp;x&lt;1,f(x),nan)
+
+Function f on support (0,1):
+g(x) = if(0&lt;x&amp;x&lt;1,f(x),0)
+g(x) = f(x)(x&gt;0)(x&lt;1)
+
+Partial sum of the power series of the exponential function:
+f(x) = sum({k|x^k/fac(k)},0,20)
+
+Gamma function via parameter integral:
+f(x) = int({t|t^(x-1)*exp(-t)},0,10)
+
+Bifurcation diagramm for the logistic map:
+f(x) = {r|pow({x|r*x*(1-x)},40,rand(0,1))}(x)
+
+Mandelbrot set:
+f(z) = {c|pow({z|z^2+c},10,0)}(z)
+
+Newton fractal of x^3-1=0:
+f(z) = pow({x|x-(x^3-1)/(3x^2)},10,z)
+Click with the mouse in one of the basins to get the
+corresponding root.
+
+Table of prime numbers:
+filter(isprime,1:100)
+
+Count the number of primes:
+count(isprime,1:100)
+
+Twin primes:
+filter({k|isprime(k)&amp;(isprime(k+2)|isprime(k-2))},1:100)
+
+Prime factorization of the numbers from 1 to 100:
+table(factor,1:100)
+
+Find cyclic multiplicative groups of integers:
+filter({n|phi(n)=lambda(n)},1:100)
+
+Continued fraction representation of the exponential function:
+f(x) = 1+x/(1-reduce({t,k|x/k/(1+x/k-t)},rev(2:10)))
+
+Interpolation polynomial of tanh:
+f(x) = p(x); p:=ipp(table(tanh,-6:6))
+</pre>
+
+<h2 id="Advanced">
+Advanced</h2>
+
+<pre>
+<b>Defining functions</b>
+The calculator line is not just of use for calculating values,
+but also for defining an arbitrary number of functions and
+constants. For example, write the input
+  p:={x|2*x}
+and press the calc-button.
+Now p(x) is available everywhere.
+
+To define the function permanently, add the line
+  evals("p:={x|2*x}");
+to the end of the file "plot.js". If the function has to be
+complex, add the line
+  evalsc("p:={x|2*x}");
+to the end of the file "cplot.js" instead.
+
+A function may be programmed in Javascript to extend the list
+of predefined functions. To achieve the function is available,
+add the following code to the end of the file "plot.js".
+
+function p(x){
+  return 2*x;
+}
+ftab.p=p;
+
+<b>Functions with two arguments</b>
+If you want to have the function p(x,y)=x*y, define p:={x,y|x*y}
+in the calculator line and press the calc-button.
+
+Alternatively define a function that takes a list instead.
+So define in the calculator line p:={a|get(a,1)*get(a,2)}.
+Therefore the function application is written p([x,y])
+and not p(x,y).
+
+<b>Domain of a function</b>
+To draw the function f(x)=sin(x) only in the interval (0,2pi), write
+  f(x) = if(0&lt;x&amp;x&lt;2pi,sin(x),nan).
+The expression stands for
+  if 0&lt;x and x&lt;2pi, then sin(x), else not a number.
+
+<b>Solving equations</b>
+The equation f(x)=0 with f(x)=e^x+x^3-2x has to be solved. A plot
+shows a zero of f in the interval [-2,-1] and that f is injective
+in this interval. Therefore it is possible to draw the inverse
+function with g(x)=inv(f,x,-2,-1). Now the zero is simply g(0).
+To calculate the value, type g(0) in the calculator line.
+
+<b>Tables</b>
+To tabulate the function f(x)=x^2 on the intervall [0,4], write
+  table({x|x^2},range(0,4,0.1))
+in the calculator line. The input is equivalent to
+  map({x|[x,x^2]},range(0,4,0.1)).
+
+<b>Random numbers</b>
+Random numbers following a particular distribution are generated by
+the inversion method. Firstly graph the function f(x) = inv(norm,x).
+Now calculate f(rand(0,1)) in the calculator line. The results
+are normal distributed random numbers. Now define
+  a:=map({k|f(rand(0,1))},1:1000).
+The function g(x) = cdf(a,x) will show the cumulative distribution
+function for the random numbers in the list a.
+
+<b>Colors</b>
+With color(r,g,b) a function can be drawn in another color.
+Each of the values r,g,b goes from 0 to 255.
+If a number is too big oder negative, it is restricted
+to the intervall from 0 to 255.
+For example, you can write
+  f(x) = sin(x), color(220,180,0).
+Then the function will be drawn in yellow.
+If bcolor(r,g,b) is calculated in the calculator line,
+the background color of the canvas screen will be changed.
+
+<b>Number of pixels</b>
+If setw(1080) is calculated in the calculator line,
+the width of the canvas screen will be increased to 1080 pixels.
+The statement setw(w,h) will change width and height independently.
+
+<b>Coordinate system</b>
+The input of sp(x,y) (set position) in the calculator line
+changes the origin of the coordinate system to the
+pixel position (x,y).
+In case there is a selection, "manual" has to be chosen.
+
+<b>Mouse</b>
+A click with the mouse on the canvas screen saves the
+coordinates pointed to in the variables mx and my.
+Thereafter it is possible to evaluate f(mx) in the calculator line.
+
+<b>Vertical lines</b>
+If the input is
+  f(x) = 1/(x-2)/(x-4); vline(2,4),
+vertical lines at the points x=2 and x=4
+will be drawn in addition to the graph.
+
+<b>Discontinuities</b>
+The example
+  f(x) = sgn(x); scatter([0,0]); box([0,1],[0,-1])
+shows how to picture singular points and the absence of points.
+A more complicated example:
+  f(x) = floor(x);
+    scatter(map({x|[x,x]},-6:6)),
+    box(map({x|[x+1,x]},-6:6))
+
+<b>Piecewise linear interpolation</b>
+Example:
+  f(x) = p(x); p:=fn([[0,0],[1,1],[2,0],[3,-1],[4,0]])
+
+<b>Linear regression</b>
+Let a be a list of points [x,y].
+Now t:=rl(a) calculates a linear regression and we have:
+  y = t.ax*x+t.bx = t.ax*(x-t.mx)+t.my
+  x = t.ay*y+t.bx = t.ay*(y-t.my)+t.mx
+  t.mx: x mean
+  t.my: y mean
+  t.c: [t.mx,t.my] (center)
+  r: sample correlation coefficient
+
+Example:
+  f(x) = p(x);
+    a:=[[0,0],[1,2],[2,1],[3,4],[4,3],[5,4]],
+    p:=fn(a), scatter(a), t:=rl(a), box(t.c)
+  g(x) = t.ax*x+t.bx
+  h(x) = (x-t.by)/t.ay
+
+<b>Saving images</b>
+The instruction save() generates an image of the canvas screen,
+that can be saved. In some browsers the canvas screen
+itself can be saved as an image. In this case, it is not necessary
+to use save().
+
+<b>Animations</b>
+We want the amplitude of the sine function to swing between
+-1 and 1. Define f(x) = r:=sin(a/10), r*sin(x). Now write ani() in
+the calculator line and press the calc-button.
+
+<b>Closures</b>
+If you write {x;T(x)} instead of {x|T(x)}, a closure is created,
+provied the anonymous function is contained in the term of another
+anonymous function.
+
+Let the continued fraction representation of the exponential
+function serve as an example. Define
+  p:=compose(map({k|{t;x/k/(1+x/k-t)}},2:10))
+in the calculator line and press the calc-button.
+The approximation of the exponential function is
+  f(x) = 1+x/(1-p(0)).
+</pre>
+
+</body>
+</html>
+

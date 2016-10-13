@@ -1,0 +1,86 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Plotter</title>
+  <script src = "plot.js">
+  </script>
+  <link rel="stylesheet" href="s1.css">
+</head>
+<body>
+
+<select id="gt">
+<option value="0">grid off</option>
+<option value="1" selected>grid on</option>
+<option value="2">fine grid</option>
+<option value="-1">nothing</option>
+</select>
+<select id="spsx">
+<option value="1">left</option>
+<option value="2" selected>middle</option>
+<option value="3">right</option>
+<option value="4">manual</option>
+</select>
+<select id="spsy">
+<option value="1">top</option>
+<option value="2" selected>middle</option>
+<option value="3">bottom</option>
+<option value="4">manual</option>
+</select>
+<br><br><br>
+<canvas id="canvas1" width="720" height="480"
+style="border: 1px solid gray">
+No canvas.
+</canvas>
+
+<div class="nb">
+<input type="button" value="plot"
+onclick="plot()">
+<input type="button" value="&lt;"
+onclick="shiftam(); plot()">
+<input type="button" value="&gt;"
+onclick="shiftap(); plot()">
+<input type="button" value="&lt;"
+onclick="shiftbm(); plot()">
+<input type="button" value="&gt;"
+onclick="shiftbp(); plot()">
+&emsp;<span id="xy" class="mono"></span>
+<br><br>
+<table>
+<tr><td style="text-align: right">
+f(x) = <input type="text" id="inputf" style="width: 600px"><br>
+g(x) = <input type="text" id="inputg" style="width: 600px"><br>
+h(x) = <input type="text" id="inputh" style="width: 600px">
+</td></tr>
+</table>
+<br>
+<table>
+<tr><td>
+px = <input type="text" id="inputx" value="0"><br>
+py = <input type="text" id="inputy" value="0"><br>
+wx = <input type="text" id="inputwx" value="10"><br>
+wy = <input type="text" id="inputwy" value="10"><br>
+</td><td style="padding-left: 2em">
+a = <input type="text" id="inputa" value="0"><br>
+d = <input type="text" id="inputd" value="1"><br>
+b = <input type="text" id="inputb" value="0"><br>
+d = <input type="text" id="inputdb" value="1">
+</td></tr>
+</table>
+<br>
+n = <input type="text" id="inputn" value="1000">
+<br><br>
+<a href="doc.htm" style="color: #606052">help</a>
+(<a href="docDe.htm" style="color: #606052">Hilfe</a>)
+<br><br>
+<input type="button" value="calc" onclick="calc()">
+<input type="text" id="inputc" style="width:400px">
+<br>
+<p id="ans" class="mono">ans =</p>
+<br><br>
+<br>
+</div>
+
+</body>
+</html>
+

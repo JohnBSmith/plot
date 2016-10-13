@@ -1,0 +1,65 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Plotter</title>
+  <script src = "plot.js">
+  </script>
+  <script src = "eplot.js">
+  </script>
+  <script>
+plot=plot3d;
+  </script>
+  <link rel="stylesheet" href="s1.css">
+</head>
+<body>
+
+<br>
+<br><br>
+<canvas id="canvas1" width="720" height="480"
+style="border: thin solid gray">
+No canvas.
+</canvas>
+
+<div class="nb">
+<input type="button" value="plot"
+onclick="plot3d()">
+<input type="button" value="&lt;"
+onclick="shiftphim(); plot3d()">
+<input type="button" value="&gt;"
+onclick="shiftphip(); plot3d()">
+<input type="button" value="dg"
+onclick="switchdg()">
+<input type="button" value="&lt;"
+onclick="shiftam(); plot3d()">
+<input type="button" value="&gt;"
+onclick="shiftap(); plot3d()">
+<br><br>
+f(x,y) = <input type="text" id="inputf" style="width: 600px"
+value = "">
+<br>
+g(x,y) = <input type="text" id="inputg" style="width: 600px"
+value = "">
+<br><br>
+w = <input type="text" id="inputw" value="10">&emsp;
+a = <input type="text" id="inputa" value="0"><br>
+m = <input type="text" id="inputm" value="1">&emsp;
+d = <input type="text" id="inputd" value="1">
+<br>
+phi = <input type="text" id="inputphi" value="0"><br>
+n = <input type="text" id="inputn" value="100">
+<br><br>
+<a href="doc.htm" style="color: #606052">help</a>
+(<a href="docDe.htm" style="color: #606052">Hilfe</a>)
+<br><br>
+<input type="button" value="calc" onclick="calc()">
+<input type="text" id="inputc" style="width:400px">
+<br>
+<p id="ans" class="mono">ans =</p>
+<br><br>
+<br>
+</div>
+
+</body>
+</html>
+

@@ -1,0 +1,756 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="main.css">
+  <title>Anleitung zu den Plottern</title>
+</head>
+<body>
+
+<p><a href="doc.htm">EN</a> | <a href="homeDe.htm">Home</a>
+</p>
+<h1>Anleitung zu den Plottern</h1>
+
+<h2 id="toc">Inhaltsverzeichnis</h2>
+<ul>
+<li><a href="#Konstanten">Konstanten</a>
+<li><a href="#Funktionen">Liste von Funktionen</a>
+<li><a href="#KFkt">Komplexe Funktionen</a>
+<li><a href="#Operatoren">Operatoren</a>
+<li><a href="#Syntax">Syntax und Semantik</a>
+<li><a href="#Plotter">Die jeweiligen Plotter im Einzelnen</a>
+<li><a href="#Beispiele">Beispiele</a>
+<li><a href="#Fortgeschritten">Fortgeschrittene Anwendung</a>
+</ul>
+
+<h2 id="Konstanten">
+Konstanten</h2>
+<pre>
+e......eulersche Zahl
+pi.....Kreiszahl
+gc.....Euler-Mascheroni-Konstante
+grad...pi/180
+</pre>
+
+<h2 id="Funktionen">
+Liste von Funktionen</h2>
+<pre>
+<b>Elementare</b>
+abs(x)........Betrag
+sgn(x)........Signum
+sqrt(x).......Wurzel
+root(n,x).....n-te Wurzel
+floor(x)......rundet x ab
+ceil(x).......rundet x auf
+rd(x).........gerundeter Wert
+frac(x).......Nachkomma-Anteil
+max(a,b)......Maximum
+min(a,b)......Minimum
+mod(x,m)......Modulo-Funktion
+H(x)..........Sprungfunktion
+
+exp(x)........Exponentialfunktion
+ln(x).........natürlicher Logarithmus
+lg(x).........dekadischer Logarithmus
+ld(x).........Logarithmus zur Basis zwei
+log(x,b)......Logarithmus zur Basis b
+
+<b>Trigonometrische</b>
+sin(x)........Sinus
+cos(x)........Kosinus
+tan(x)........Tangens
+cot(x)........Kotangens
+sec(x)........Sekans
+csc(x)........Kosekans
+
+asin(x).......Arkus Sinus
+acos(x).......Arkus Kosinus
+atan(x).......Arkus Tangens
+acot(x).......Arkus Kotanges
+asec(x).......Arkus Sekans
+acsc(x).......Arkus Kosekans
+
+gd(x).........Gudermann-Funktion
+hypot(x,y)....Länge des Koordinatenvektors (x,y)
+angle(x,y)....Winkel des Koordinatenvektors (x,y)
+
+<b>Hyperbolische</b>
+sinh(x).......Sinus Hyperbolicus
+cosh(x).......Kosinus Hyperbolicus
+tanh(x).......Tangens Hyperbolicus
+coth(x).......Kotangens Hyperbolicus
+sech(x).......Sekans Hyperbolicus
+csch(x).......Kosekans Hyperbolicus
+
+asinh(x)......Area Sinus Hyperbolicus
+acosh(x)......Area Kosinus Hyperbolicus
+atanh(x)......Area Tangens Hyperbolicus
+acoth(x)......Area Kotangens Hyperbolicus
+asech(x)......Area Sekans Hyperbolicus
+acsch(x)......Area Kosekans Hyperbolicus
+
+<b>Schwingungen</b>
+twave(x,p)....Dreieckschwingung, p-periodisch
+ptwave(x,p)...positive Dreieckschwingung, p-periodisch
+sqwave(x,p)...Rechteckschwingung, p-periodisch
+psqwave(x,p)..positive Rechteckschwingung, p-periodisch
+stwave(x,p)...Sägezahnschwingung, p-periodisch
+pstwave(x,p)..positive Sägezahnschwingung, p-periodisch
+
+<b>Analysis</b>
+diff(f,x).....Ableitung von f an der Stelle x
+diff(f,x,2)...zweite Ableitung von f an der Stelle x
+diff(f,x,n)...n-te Ableitung von f an der Stelle x
+int(f,0,x)....Integral(von 0 bis x) f(t) dt
+int(f,0,x,n)..Integration mit n Schritten
+pow(f,n,x)....Verkettung von f mit sich selbst
+sum(f,a,b)....Summe(k=a bis b) f(k)
+prod(f,a,b)...Produkt(k=a bis b) f(k)
+rand(a,b).....Zufallszahl aus dem Intervall [a,b)
+inv(f,x)......Umkehrfunktion f^(-1)(x)
+inv(f,x,a,b)..f^(-1)(x) für f definiert auf [a,b]
+
+<b>Hilfsfunktionen</b>
+list(a1,...,an), [a1,...,an]
+..............Zusammenfassung der Werte zu einer Liste
+get(a,i)......das i-te Element aus der Liste a
+size(a).......Anzahl der Elemente von a
+cat(a,b)......verbindet die Listen a und b
+range(a,b)....erzeugt die Liste [a,a+1,...,b]
+range(a,b,d)..erzeugt die Liste [a,a+d,a+2d,...]
+next(a).......wählt zyklisch ein Element aus der Liste a aus
+rand(a).......wählt zufällig ein Element aus der Liste a aus
+sum(a)........summiert alle Elemente der Liste a auf
+prod(a).......multipliziert alle Elemente der Liste a
+max(a)........Maximum von allen Elementen aus a
+min(a)........Minimum von allen Elementen aus a
+rev(a)........umgedrehte Liste
+ipp(a)........Interpolationspolynom, a=[[x0,y0],...,[xn,yn]]
+fn(a).........stückweise lineare Interpolation
+map(f,a)......appliziert die Funktion f auf alle Elemente aus a
+filter(f,a)...filtert Elemente aus a mit der Testfunktion f aus
+reduce(f,a)...reduziert a mit f(x,y)
+compose(a)....verkettet alle Funktionen aus der Liste a
+count(f,a)....zählt, wie oft f(x) für x in a wahr ist
+forall(f,a)...f(x) ist für alle x in a wahr
+exists(f,a)...es gibt ein x in a bei dem f(x) wahr ist
+table(f,a)....Wertetabelle für die Liste a
+apply(f,x)....Applikation von f auf x
+if(c,a,b).....wenn c, dann a, sonst b
+not(a)........logische Negation
+
+<b>Gamma und Verwandte</b>
+fac(x)........Fakultät
+gamma(x)......Gamma-Funktion
+digamma(x)....Digamma-Funktion
+pgamma(n,x)...Polygamma-Funktion
+B(a,b)........Beta-Funktion
+gamma(s,x)....untere unvollständige Gamma-Funktion
+Gamma(s,x)....obere unvollständige Gamma-Funktion
+B(x,a,b)......unvollständige Beta-Funktion B[x](a,b)
+I(x,a,b)......B(x,a,b)/B(a,b)
+G(x)..........barnessche G-Funktion
+hyperK(x).....K-Funktion
+
+<b>Kombinatorische</b>
+bc(n,k).......Binomialkoeffizient
+ff(n,k).......fallende Faktorielle
+rf(n,k).......steigende Faktorielle
+bracket(n,k)..Stirling-Zahl der ersten Art
+brace(n,k)....Stirling-Zahl der zweiten Art
+
+<b>Elliptische Integrale</b>
+K(m)..........vollständiges elliptisches Integral K(m=k^2)
+E(m)..........vollständiges elliptisches Integral E(m=k^2)
+F(phi,m)......unvollständiges elliptisches Integral F(phi,m=k^2)
+E(phi,m)......unvollständiges elliptisches Integral E(phi,m=k^2)
+Pi(phi,n,m)...unvollständiges elliptisches Integral Pi(phi,n,m=k^2)
+RF(x,y,z).....symmetrische Carlson-Form RF(x,y,z)
+RJ(x,y,z,p)...symmetrische Carlson-Form RJ(x,y,z,p)
+RC(x,y).......Kurzform für RF(x,y,y)
+RD(x,y,z).....Kurzform für RJ(x,y,z,z)
+agm(a,b)......arithmetisch-geometrisches Mittel
+magm(a,b).....modifiziertes arithmetisch-geometrisches Mittel
+
+<b>Integralfunktionen</b>
+Ei(x).........Integral-Exponentialfunktion
+En(n,x).......Integral-Exponentialfunktion E[n](x)
+li(x).........Integral-Logarithmus
+Li(x).........um li(2) versetzter Integral-Logarithmus
+Si(x).........Integral-Sinus
+Ci(x).........Integral-Kosinus
+
+<b>Bessel-Funktionen und Verwandte</b>
+BJ(a,x).......Bessel-Funktion J[a](x)
+BY(a,x).......Bessel-Funktion Y[a](x)
+Bj(a,x).......sphärische Bessel-Funktion j[a](x)
+By(a,x).......sphärische Bessel-Funktion y[a](x)
+BI(a,x).......modifizierte Bessel-Funktion I[a](x)
+BK(a,x).......modifizierte Bessel-Funktion K[a](x)
+Ai(x).........Airy-Funktion Ai(x)
+Bi(x).........Airy-Funktion Bi(x)
+
+<b>Hypergeometrische Funktionen</b>
+F([a1,...,am],[b1,...,bn],x)
+..............hypergeometrische Funktion
+M(a,b,x)......konfluente hypergeometrische Funktion M(a,b,x)
+U(a,b,x)......konfluente hypergeometrische Funktion U(a,b,x)
+
+<b>Zeta und Verwandte</b>
+zeta(s).......Zeta-Funktion
+zeta(s,a).....hurzwitzsche Zeta-Funktion
+Phi(x,s,a)....lerchsche Zeta-Funktion
+Li(s,x).......Polylogarithmus Li[s](x)
+B(k)..........Bernoulli-Zahl, B(1)=+1/2
+Bm(k).........Bernoulli-Zahl, Bm(1)=-1/2
+
+<b>Polynomfunktionen</b>
+PP(n,a,x).....Legendre-Polynom P[n,a](x)
+PL(n,a,x).....Laguerre-Polynom L[n,a](x)
+PH(n,x).......Hermite-Polynom H[n](x)
+PT(n,x).......Tschebyschow-Polynom T[n](x)
+PU(n,x).......Tschebyschow-Polynom U[n](x)
+
+<b>Fourier-Analysis</b>
+fa(f,i,j).....Fourier-Koeffizienten a[i] bis a[j]
+fb(f,i,j).....Fourier-Koeffizienten b[i] bis b[j]
+fs(x,a0,a,b)..Fourier-Reihe, a=[a1,a2,...], b=[b1,b2,...]
+fs(x,a0,a)....Amplituden-Phasen-Form(cos), a=[[A1,phi1],[A2,phi2],...]
+Fs(f,x).......Sinus-Transformation, x in Hz
+Fc(f,x).......Kosinus-Transformation, x in Hz
+comb(x,a,p)...Dirac-Kamm der Schärfe a und Periode p
+
+<b>Funktionalanalysis</b>
+sinc(x).......Kardinalsinus: sin(pi*x)/(pi*x)
+delta(x,a)....Nadel-Impuls
+L(f,x)........Laplace-Transformation
+E(a,b,x)......Mittag-Leffler-Funktion E[a,b](x)
+D(f,x,r)......fraktionale Ableitung (D^r)(f)(x)
+J(f,a,x,r)....Riemann-Liouville-Integral (J[a]^r)(f)(x)
+J2(f,a,x,r)...Riemann-Liouville-Integral, alternativer Algorithmus
+
+<b>Sonstige</b>
+W(x)..........Lambert-W-Funktion, oberer Ast
+Wm1(x)........Lambert-W-Funktion, unterer Ast
+
+<b>Zahlentheorie</b>
+pm(x,n,m).....modulare Potenz
+gcd(a,b)......größter gemeinsamer Teiler
+lcm(a,b)......kleinstes gemeinsames Vielfaches
+isprime(n)....Primzahltest
+factor(n).....Primfaktorzerlegung
+pcf(n)........Primzahlfunktion pi(n)
+phi(n)........eulersche Phi-Funktion
+lambda(n).....Carmichael-Funktion
+sigma(n,k)....Teilerfunktion sigma[k](n)
+
+<b>Statistik</b>
+erf(x)........Fehlerfunktion
+norm(x).......kumulierte Standardnormalverteilung
+mean(a).......arithmetisches Mittel der Elemente aus a
+sd(a).........Standardabweichung der Elemente aus a
+cdf(a,x)......CDF für die Zufallszahlen in a
+pmf(a,x)......PMF, a ist eine Liste von ganzen Zahlen
+
+pmfB(n,p,k)...Binomialverteilung, PMF
+cdfB(n,p,k)...Binomialverteilung, CDF
+pmfG(p,k).....geometrische Verteilung, PMF
+cdfG(p,k).....geometrische Verteilung, CDF
+pmfH(N,K,n,k)...hypergeometrische Verteilung, PMF
+cdfH(N,K,n,k)...hypergeometrische Verteilung, CDF
+pmfP(lambda,k)...Poisson-Verteilung, PMF
+cdfP(lambda,k)...Poisson-Verteilung, CDF
+pmfLog(p,k)...logarithmische Verteilung, PMF
+cdfLog(p,k)...logarithmische Verteilung, CDF
+
+pdfN(mu,sigma,x)...Normalverteilung, PDF
+cdfN(mu,sigma,x)...Normalverteilung, CDF
+pdfLogN(mu,sigma,x)...Log-Normalverteilung, PDF
+cdfLogN(mu,sigma,x)...Log-Normalverteilung, CDF
+pdfExp(lambda,x)...Exponentialverteilung, PDF, E=1/lambda
+cdfExp(lambda,x)...Exponentialverteilung, CDF, E=1/lambda
+pdfst(n,x)....Student-t-Verteilung, PDF
+cdfst(n,x)....Student-t-Verteilung, CDF
+pdfF(m,n,x)...Fisher-Verteilung, PDF
+cdfF(m,n,x)...Fisher-Verteilung, CDF
+pdfW(a,b,x)...Weibull-Verteilung, PDF, E=b*gamma(1+1/a)
+cdfW(a,b,x)...Weibull-Verteilung, CDF, E=b*gamma(1+1/a)
+pdfGamma(b,p,x)...Gamma-Verteilung, PDF, E=p/b
+cdfGamma(b,p,x)...Gamma-Verteilung, CDF, E=p/b
+pdfBeta(p,q,x)...Beta-Verteilung, PDF
+cdfBeta(p,q,x)...Beta-Verteilung, CDF
+</pre>
+
+<h2 id="KFkt">
+Komplexe Funktionen</h2>
+
+<pre>
+<b>Elementare</b>
+re(z).........Realteil
+im(z).........Imaginärteil
+conj(z).......Konjugation
+arg(z)........Phasenwinkel
+abs(z)........Betrag
+sgn(z)........Signum
+sqrt(z).......Wurzel
+root(n,z).....n-te Wurzel
+exp(z)........Exponentialfunktion
+ln(z).........natürlicher Logarithmus
+lg(z).........dekadischer Logarithmus
+log(z,b)......Logarithmus zur Basis b
+
+<b>Trigonometrische</b>
+sin(z)........Sinus
+cos(z)........Kosinus
+tan(z)........Tangens
+cot(z)........Kotangens
+
+asin(z).......Arkus Sinus
+acos(z).......Arkus Kosinus
+atan(z).......Arkus Tangens
+acot(z).......Arkus Kotangens
+
+<b>Hyperbolische</b>
+sinh(z).......Sinus Hyperbolicus
+cosh(z).......Kosinus Hyperbolicus
+tanh(z).......Tangens Hyperbolicus
+coth(z).......Kotangens Hyperbolicus
+
+asinh(z)......Area Sinus Hyperbolicus
+acosh(z)......Area Kosinus Hyperbolicus
+atanh(z)......Area Tangens Hyperbolicus
+acoth(z)......Area Kotangens Hyperbolicus
+
+<b>Komplexe Analysis</b>
+diff(f,z).....komplexe Ableitung
+diff(f,z,n)...n-te komplexe Ableitung
+int(f,a,b)....Integral(von a bis b) f(t) dt
+cint(f,g).....Wegintegral(von g(0) bis g(1)) f(z) dz
+vint(f,a).....Wegintegral(von get(a,1) bis get(a,n)) f(z) dz
+
+<b>Gamma und Verwandte</b>
+fac(z)........Fakultät
+gamma(z)......Gamma-Funktion
+digamma(z)....Digamma-Funktion
+gamma(s,z)....untere unvollständige Gamma-Funktion
+Gamma(s,z)....obere unvollständige Gamma-Funktion
+
+<b>Elliptische Integrale</b>
+K(m)..........vollständiges elliptisches Integral K(m=k^2)
+E(m)..........vollständiges elliptisches Integral E(m=k^2)
+
+<b>Integralfunktionen</b>
+erf(z)........Fehlerfunktion
+Ei(z).........Integral-Exponentialfunktion
+En(n,z).......Integral-Exponentialfunktion E[n](x)
+
+<b>Zeta und Verwandte</b>
+zeta(z).......Zeta-Funktion
+zeta(s,a).....hurzwitzsche Zeta-Funktion
+Phi(x,s,a)....lerchsche Zeta-Funktion
+B(k)..........Bernoulli-Zahl
+
+<b>Sonstige</b>
+theta1(z,q)...Theta-Funktion theta1(z,q)
+theta2(z,q)...Theta-Funktion theta2(z,q)
+theta3(z,q)...Theta-Funktion theta3(z,q)
+theta4(z,q)...Theta-Funktion theta4(z,q)
+sn(z,k).......Sinus Amplitudinis
+cn(z,k).......Kosinus Amplitudinis
+dn(z,k).......Delta Amplitudinis
+</pre>
+
+
+<h2 id="Operatoren">
+Operatoren</h2>
+
+<pre>
+01 f\x.....f appliziert auf x
+02 a^b.....a hoch b
+03 +a......plus a
+03 -a......minus a
+04 a*b.....a mal b
+04 a/b.....a geteilt durch b
+04 a%b.....a modulo b
+05 a+b.....a plus b
+05 a-b.....a minus b
+06 a:b.....[a,a+1,...,b]
+07 a&lt;b.....wenn a kleiner als b ist, dann 1, sonst 0
+07 a&gt;b.....wenn a größer als b ist, dann 1, sonst 0
+07 a&lt;=b....wenn a kleiner gleich b ist, dann 1, sonst 0
+07 a&gt;=b....wenn a größer gleich b ist, dann 1, sonst 0
+08 a=b.....wenn abs(a-b)&lt;epsilon, dann 1, sonst 0
+08 a!=b....wenn abs(a-b)&gt;epsilon, dann 1, sonst 0
+09 a&amp;b.....a und b
+10 a|b.....a oder b
+</pre>
+
+
+<h2 id="Syntax">
+Syntax und Semantik</h2>
+<pre>
+Folgendes ist bei der Syntax zu beachten:
+
+* Das Dezimaltrennzeichen ist der Punkt.
+* x hoch 2 schreibt man x^2.
+* Anstelle von x^-1 muss man x^(-1) schreiben.
+* Der Potenzierungsoperator ist links-assoziativ.
+  Das heißt a^b^c = (a^b)^c.
+* x/a/b bedeutet (x/a)/b.
+* Anstelle von 2*x ist auch 2x erlaubt.
+* Anstelle von (x+2)*(x-2) kann man auch (x+2)(x-2) schreiben.
+* Anstelle von x(x-1) muss man aber x*(x-1) schreiben.
+* Auch bei a*x und x*x darf das Multiplikationszeichen nicht
+  ausgelassen werden.
+
+Wenn am Anfang einer Eingabezeile ein Hash (#) steht, dann
+wird die danach folgende Funktion definiert, jedoch nicht
+gezeichnet. Man kann z.B. folgende Eingaben schreiben:
+  f(x) = # sin(x)
+  g(x) = f(2pi*x)
+
+Die Ableitung der Funktion f an der Stelle x wird mit diff(f,x)
+berechnet. Man kann z.B. schreiben:
+  f(x) = 2x
+  g(x) = diff(f,x)
+
+Die Formulierung diff(2x,x) ist jedoch falsch, da 2x ein Term ist
+und keine Funktion. Man muss die Variable x erst binden. Die Syntax
+dafür ist {x| Term von x}. Zum Term 2x gehört die Funktion {x|2x}.
+Man kann ebenso auch {t|2t} oder {u|2u} schreiben. Die richtige
+Formulierung ist also g(x) = diff({x|2x},x).
+
+Möchte man g(x) = Integral(von 0 bis x) 2t dt zeichnen,
+so schreibt man g(x) = int({t|2t},0,x).
+
+Die Eingabe von
+  f(x) = 1+(x-2)+(x-2)^2/2+(x-2)^3/6
+ist gleichbedeutend mit
+  f(x) = {x|1+x+x^2/2+x^3/6}(x-2).
+
+Der Operator ":=" weist einer Variablen einen Wert zu.
+Anstelle von
+  f(x,y) = sin(sqrt(x^2+y^2))/sqrt(x^2+y^2)
+kann man somit auch schreiben
+  f(x,y) = r:=sqrt(x^2+y^2), sin(r)/r.
+
+Es ist auch möglich, mehrere Funktionen auf einmal zu plotten.
+Beispiele:
+  f(x) = next([x,x^2,1/x])
+  f(x) = next([-2,-1,1,2])*sin(x)
+  f(x) = next(-4:4)*sin(x)
+Es kann sein, dass die Graphen nicht richtig durchgezogen sind.
+Die Erhöhung der Anzahl der Punkte wird die Lücken dann schließen.
+
+Wenn eine Anweisung nicht für jeden x-Wert ausgeführt werden soll,
+sondern nur ein einziges mal, so muss die Anweisung hinter einem
+Semikolon erscheinen. Z.B. gibt es einen Unterschied zwischen
+  f(x) = r:=rand(0,1), x+r
+und
+  f(x) = x+r; r:=rand(0,1).
+</pre>
+
+<h2 id="Plotter">
+Die jeweiligen Plotter im Einzelnen</h2>
+
+<pre>
+<b>Plotter für reelle Funktionen</b>
+px: Betrachtungspunkt, x-Koordinate
+py: Betrachtungspunkt, y-Koordinate
+wx: Breite vom Ausschnitt
+wy: Höhe vom Ausschnitt
+
+Das x-Intervall der Betrachtung ist
+  [px-wx, px+wx]
+und das y-Intervall ist
+  [py-wy, py+wy].
+
+n: Anzahl der Punkte im Intervall
+  [px, px+wx]
+
+a: Parameter
+d: Abstand (a:=a-d, a:=a+d)
+b: Parameter
+d: Abstand (b:=b-d, b:=b+d)
+
+<b>Plotter für implizite Funktionen</b>
+Zwei Funktionen lassen sich simultan plotten, wenn sie durch
+ein ODER getrennt werden. Wenn x*y=1 und y=x die beiden Funktionen
+sind, so lautet die Eingabe also
+  x*y=1 | y=x.
+Wird das ODER (|) durch ein UND (&amp;) ersetzt, so entspricht dies
+einem Gleichungssystem. Anstelle von Gleichungen sind auch
+Ungleichungen möglich, z.B.
+  abs(x)+abs(y)&lt;1.
+
+<b>Plotter für Lösungen von Differentialgleichungen</b>
+Man schreibt y1 anstelle von y' und y2 anstelle von y'' usw.
+
+<b>Plotter für Systeme aus zwei Differentialgleichungen</b>
+Wir wollen den gedämpften Schwinger untersuchen, der durch die
+Gleichung y''+0.2y'+sin(y)=0 gegeben ist. Sei v(x):=y'(x). Die
+Eingabe ist daher
+  y'(x)=v,
+  v'(x)=-0.2v-sin(y).
+Wähle nun v(y) (Phasenraumportrait) anstelle von y(x).
+Als Anfangswerte nimmt man nun z.B.
+  x0=0,
+  y(x0)=-10:10,
+  v(x0)=0.
+
+<b>Plotter für Folgen</b>
+Die rekursive Definition von Folgen ist möglich.
+Nehmen wir die rekursive Definition
+  f(n) = wenn n=0 dann 1 sonst 2f(n-1)
+als Beispiel. Die Eingabe dafür lautet
+  f(n) = if(n=0,1,2f(n-1)).
+In der Taschenrechnerzeile schreibt man stattdessen
+  p:=fix({f,n|if(n=0,1,2f(n-1))}).
+Die Funktion fix wird die Werte memoisieren. Definiere
+  fib:=fix({f,n|if(n=1|n=2,1,f(n-1)+f(n-2))}).
+Nun wird fib(40) effizient berechnet. Andernfalls
+wäre die Anzahl der notwendigen Berechnungen in O(2^n).
+
+Reihen können mit der Funktion sum(f,a,b) definiert werden.
+Für Summe(von k=1 bis n) 1/k ist die Eingabe z.B.
+  f(n) = sum({k|1/k},1,n)
+oder auch
+  f(n) = 1/n,
+  g(n) = sum(f,1,n).
+
+<b>Plotter für komplexwertige Funktionen</b>
+Die Funktion f(x) = exp(i*x) soll als Beispiel dienen.
+Schreibt man
+  f(x) = exp(i*x),
+so wird der Realteil geplottet. Man schreibt
+  g(x) = im(exp(i*x)),
+um den Imaginärteil zu zeichnen und analog
+  h(x) = abs(exp(i*x))
+für den Betrag.
+
+<b>Plotter für Fraktale</b>
+Die Darstellung von Julia-Mengen ist ebenfalls möglich.
+Als Eingabe wählt man z.B. f(z)=z^2-1 und z0=c.
+r: Beschränkungsradius
+n: maximale Zahl an Iterationen
+</pre>
+
+
+<h2 id="Beispiele">
+Beispiele</h2>
+
+<pre>
+Tangente:
+g(x) = diff(f,a)(x-a)+f(a)
+
+Normale:
+h(x) = -1/diff(f,a)(x-a)+f(a)
+
+Funktion f auf das Intervall (0,1) einschränken:
+g(x) = if(0&lt;x&amp;x&lt;1,f(x),nan)
+
+Funktion f auf dem Träger (0,1):
+g(x) = if(0&lt;x&amp;x&lt;1,f(x),0)
+g(x) = f(x)(x&gt;0)(x&lt;1)
+
+Partialsumme der Potenzreihe der Exponentialfunktion:
+f(x) = sum({k|x^k/fac(k)},0,20)
+
+Gammafunktion via Parameterintegral:
+f(x) = int({t|t^(x-1)*exp(-t)},0,10)
+
+Bifurkationsdiagramm der logistischen Gleichung:
+f(x) = {r|pow({x|r*x*(1-x)},40,rand(0,1))}(x)
+
+Mandelbrotmenge:
+f(z) = {c|pow({z|z^2+c},10,0)}(z)
+
+Newton-Fraktal für x^3-1=0:
+f(z) = pow({x|x-(x^3-1)/(3x^2)},10,z)
+Mit einem Mausklick in eines der Basins bekommt man die
+entsprechende Nullstelle.
+
+Tabelle der Primzahlen:
+filter(isprime,1:100)
+
+Anzahl der Primzahlen:
+count(isprime,1:100)
+
+Primzahlzwillinge:
+filter({k|isprime(k)&amp;(isprime(k+2)|isprime(k-2))},1:100)
+
+Primfaktorzerlegung der Zahlen von 1 bis 100:
+table(factor,1:100)
+
+Finde zyklische prime Restklassengruppen:
+filter({n|phi(n)=lambda(n)},1:100)
+
+Kettenbruchdarstellung der Exponentialfunktion:
+f(x) = 1+x/(1-reduce({t,k|x/k/(1+x/k-t)},rev(2:10)))
+
+Interpolationspolynom für tanh:
+f(x) = p(x); p:=ipp(table(tanh,-6:6))
+</pre>
+
+<h2 id="Fortgeschritten">
+Fortgeschrittene Anwendung</h2>
+
+<pre>
+<b>Funktionen definieren</b>
+Mit der Taschenrechnerzeile kann man nicht nur Werte berechnen,
+sondern auch eine beliebige Anzahl von Funktionen und Konstanten
+definieren. Man schreibt in der Taschenrechnerzeile z.B.
+  p:={x|2*x}
+und betätigt dann den calc-Button. Die Funktion p(x) lässt sich
+nun verwenden, wo auch immer man will.
+
+Um die Funktion permanent zu definieren muss man die Zeile
+  evals("p:={x|2*x}");
+zum Ende der Datei "plot.js" hinzufügen. Falls die Funktion komplex
+sein soll, fügt man stattdessen die Zeile
+  evalsc("p:={x|2*x}");
+zum Ende der Datei "cplot.js" hinzu.
+
+Zur Liste der vordefinierten Funktionen können leicht weitere
+in Javascript programmierte Funktionen hinzugefügt werden.
+Die Funktionen müssen lediglich in der Tabelle "ftab" aufgeführt
+werden um im Plotter verwendbar zu sein. Z.B. fügt man den
+folgenden Programmtext zur Datei "plot.js" hinzu.
+
+function p(x){
+  return 2*x;
+}
+ftab.p=p;
+
+<b>Funktionen mit zwei Argumenten</b>
+Will man die Funktion p(x,y)=x*y definieren, so schreibt man
+in der Taschenrechnerzeile p:={x,y|x*y} und betätigt den
+calc-Button. Funktionen mit mehr als zwei Argumenten definiert
+man analog.
+
+Alternativ lässt sich eine Liste zur Definition verwenden.
+Definiere in der Taschenrechnerzeile p:={a|get(a,1)*get(a,2)}.
+Der Aufruf erfolgt in diesem Fall nicht mit p(x,y),
+sondern mit p([x,y]).
+
+<b>Definitionsbereich</b>
+Um die Funktion f(x)=sin(x) nur im Intervall (0,2pi) zu zeichnen,
+schreibt man
+  f(x) = if(0&lt;x&amp;x&lt;2pi,sin(x),nan).
+Der Ausdruck steht für
+  wenn 0&lt;x und x&lt;2pi, dann sin(x), sonst not a number.
+
+<b>Gleichungen lösen</b>
+Die Gleichung f(x)=0 mit f(x)=e^x+x^3-2x soll gelöst werden. Ein Plot
+zeigt, dass sich die Nullstelle im Intervall [-2,-1] befindet und
+dass die Funktion f auf diesem Intervall injektiv ist. Man kan nun
+die Umkehrfunktion mit g(x)=inv(f,x,-2,-1) zeichnen lassen.
+Die Nullstelle ist dann einfach g(0). Um den Wert zu berechnen gibt
+man g(0) in die Taschenrechnerzeile ein.
+
+<b>Wertetabellen</b>
+Eine Wertetabelle für f(x)=x^2 auf dem Intervall [0,4]
+erzeugt man durch die Eingabe von
+  table({x|x^2},range(0,4,0.1))
+in der Taschenrechnerzeile. Alternativ schreibt man
+  map({x|[x,x^2]},range(0,4,0.1)).
+
+<b>Zufallszahlen</b>
+Zufallszahlen, die einer bestimmten Verteilung folgen, lassen sich
+mit der Inversionsmethode erzeugen. Plotte f(x) = inv(norm,x).
+In der Taschenrechnerzeile lassen sich nun mit f(rand(0,1))
+normalverteilte Zufallszahlen erzeugen. Definiere nun
+  a:=map({k|f(rand(0,1))},1:1000).
+Die Funktion g(x) = cdf(a,x) zeigt die Verteilungsfunktion
+bezüglich der Zufallszahlen in der Liste a.
+
+<b>Farben</b>
+Eine Funktion lässt sich mit color(r,g,b) in einer anderen
+Farbe darstellen. Dabei gehen r,g,b jeweils von 0 bis 255.
+Wenn eine Zahl zu groß oder zu klein ist, so wird
+sie auf das Intervall von 0 bis 255 eingeschränkt.
+Man schreibt z.B.
+  f(x) = sin(x), color(220,180,0).
+Damit wird die Funktion in gelb dargestellt.
+Die Eingabe des Befehls bcolor(r,g,b) in die Taschenrechnerzeile
+verändert die Hintergrundfarbe der Zeichenfläche.
+
+<b>Pixelanzahl</b>
+Wenn man setw(1080) in die Taschenrechnerzeile eingibt,
+so wird die Breite der Zeichenfläche auf 1080 Pixel erhöht.
+Mit setw(w,h) ändert man Breite und Höhe unabhängig voneinander.
+
+<b>Koordinatensystem</b>
+Die Eingabe von sp(x,y) (set position) in der Taschenrechnerzeile
+bewirkt, dass sich der Koordinatenursprung beim nächsten Plot an
+der Pixelposition (x,y) befinden wird. Falls es eine Auswahl gibt,
+muss diese jedoch auf manuell gestellt sein.
+
+<b>Maus</b>
+Wenn man mit der Maus auf die Zeichenfläche klickt, dann werden
+die Koordinaten, auf die gezeigt wurde, in den Variablen mx und
+my gespeichert. Man kann dann z.B. in der Taschenrechnerzeile
+f(mx) auswerten.
+
+<b>Vertikale Linien</b>
+Um zusätzlich zur Funktion f(x) = 1/(x-2)/(x-4) an den Stellen zwei
+und vier jeweils eine vertikale Linie zu zeichnen, schreibt man
+  f(x) = 1/(x-2)/(x-4); vline(2,4).
+
+<b>Unstetigkeiten</b>
+Das Beispiel
+  f(x) = sgn(x); scatter([0,0]); box([0,1],[0,-1])
+veranschaulicht singuläre Punkte und die Abwesenheit von Punkten.
+Ein komplizierteres Beispiel:
+  f(x) = floor(x);
+    scatter(map({x|[x,x]},-6:6)),
+    box(map({x|[x+1,x]},-6:6))
+
+<b>Stückweise lineare Interpolation</b>
+Beispiel:
+  f(x) = p(x); p:=fn([[0,0],[1,1],[2,0],[3,-1],[4,0]])
+
+<b>Lineare Regression</b>
+Sei a eine Liste von Punkten [x,y].
+Nun berechnet t:=rl(a) eine lineare Regression und es ist:
+  y = t.ax*x+t.bx = t.ax*(x-t.mx)+t.my
+  x = t.ay*y+t.bx = t.ay*(y-t.my)+t.mx
+  t.mx: Mittelwert der x-Werte
+  t.my: Mittelwert der y-Werte
+  t.c: [t.mx,t.my] (Schwerpunkt)
+  r: Korrelationskoeffizient
+
+Beispiel:
+  f(x) = p(x);
+    a:=[[0,0],[1,2],[2,1],[3,4],[4,3],[5,4]],
+    p:=fn(a), scatter(a), t:=rl(a), box(t.c)
+  g(x) = t.ax*x+t.bx
+  h(x) = (x-t.by)/t.ay
+
+<b>Speichern</b>
+Mit dem Befehl save() wird ein Bild von der Zeichenfläche erstellt,
+welches gespeichert werden kann. In manchen Browsern kann auch die
+Zeichenfläche als Bild gespeichert werden. In diesem Fall ist es
+nicht notwendig, den Befehl save() zu benutzen.
+
+<b>Animationen</b>
+Die Amplitude der Sinus-Funktion soll zwischen -1 und 1 hin
+und her schwingen. Definiere f(x) = r:=sin(a/10), r*sin(x). Schreibe
+in der Taschenrechnerzeile ani() und betätige den calc-Button.
+
+<b>Closures</b>
+Schreibt man {x;T(x)} anstelle von {x|T(x)}, so wird ein Closure
+erzeugt, falls die anonyme Funktion im Term einer anderen anonymen
+Funktion enthalten ist.
+
+Als Beispiel soll die Kettenbruchdarstellung der Exponential-
+funktion dienen. Definiere in der Taschenrechnerzeile
+  p:=compose(map({k|{t;x/k/(1+x/k-t)}},2:10))
+und betätige dann den calc-Button.
+Die Näherung für die Exponentialfunktion ist
+  f(x) = 1+x/(1-p(0)).
+</pre>
+
+</body>
+</html>
+

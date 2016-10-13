@@ -1,0 +1,79 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Plotter</title>
+  <script src = "plot.js">
+  </script>
+  <script>
+plot=iplot;
+  </script>
+  <link rel="stylesheet" href="s1.css">
+</head>
+<body>
+
+<select id="gt">
+<option value="0">grid off</option>
+<option value="1" selected>grid on</option>
+<option value="2">fine grid</option>
+<option value="-1">nothing</option>
+</select>
+<select id="spsx">
+<option value="1">left</option>
+<option value="2" selected>middle</option>
+<option value="3">right</option>
+<option value="4">manual</option>
+</select>
+<select id="spsy">
+<option value="1">top</option>
+<option value="2" selected>middle</option>
+<option value="3">bottom</option>
+<option value="4">manual</option>
+</select>
+<select id="ptype">
+<option value="fast" selected>fast</option>
+<option value="smooth">smooth</option>
+<option value="better">better</option>
+<option value="best">best</option>
+</select>
+<br><br><br>
+<canvas id="canvas1" width="720" height="480"
+style="border: thin solid gray">
+No canvas.
+</canvas>
+
+<div class="nb">
+<input type="button" value="plot"
+onclick="iplot()">
+<input type="button" value="&lt;"
+onclick="shiftam(); iplot()">
+<input type="button" value="&gt;"
+onclick="shiftap(); iplot()">
+&emsp;<span id="xy" class="mono"></span>
+<br><br>
+<input type="text" id="inputf" style="width: 600px"
+value = "x*y=1">
+<br><br>
+px = <input type="text" id="inputx" value="0">&emsp;
+a = <input type="text" id="inputa" value="0"><br>
+py = <input type="text" id="inputy" value="0">&emsp;
+d = <input type="text" id="inputd" value="1"><br>
+wx = <input type="text" id="inputwx" value="10"><br>
+wy = <input type="text" id="inputwy" value="10">
+<br><br>
+h = <input type="text" id="inputh" value="0.2">
+<br><br>
+<a href="doc.htm" style="color: #606052">help</a>
+(<a href="docDe.htm" style="color: #606052">Hilfe</a>)
+<br><br>
+<input type="button" value="calc" onclick="calc()">
+<input type="text" id="inputc" style="width:400px">
+<br>
+<p id="ans" class="mono">ans =</p>
+<br><br>
+<br>
+</div>
+
+</body>
+</html>
+
