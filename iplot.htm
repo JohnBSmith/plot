@@ -52,19 +52,24 @@ onclick="shiftap(); iplot()">
 &emsp;<span id="xy" class="mono"></span>
 <br><br>
 <input type="text" id="inputf" style="width: 600px"
-value = "x*y=1">
+  onkeypress="handle_keys(event);" value = "x*y=1">
 <br><br>
-px = <input type="text" id="inputx" value="0">&emsp;
+px = <input type="text" id="inputx" value="0"
+  onkeypress="handle_keys(event);">&emsp;
 a = <input type="text" id="inputa" value="0"><br>
-py = <input type="text" id="inputy" value="0">&emsp;
+py = <input type="text" id="inputy" value="0"
+  onkeypress="handle_keys(event);">&emsp;
 d = <input type="text" id="inputd" value="1"><br>
-wx = <input type="text" id="inputwx" value="10"><br>
-wy = <input type="text" id="inputwy" value="10">
+wx = <input type="text" id="inputwx" value="10"
+  onkeypress="handle_keys(event);"><br>
+wy = <input type="text" id="inputwy" value="10"
+  onkeypress="handle_keys(event);">
 <br><br>
-h = <input type="text" id="inputh" value="0.2">
+h = <input type="text" id="inputh" value="0.2"
+  onkeypress="handle_keys(event);">
 <br><br>
-<a href="doc.htm" style="color: #606052">help</a>
-(<a href="docDe.htm" style="color: #606052">Hilfe</a>)
+<a href="doc.htm" class="modest">help</a>
+(<a href="doc-de.htm" class="modest">Hilfe</a>)
 <br><br>
 <input type="button" value="calc" onclick="calc()">
 <input type="text" id="inputc" style="width:400px">

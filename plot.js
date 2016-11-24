@@ -159,7 +159,7 @@ var ftab3 = {
   "pdfGamma": pdfGamma, "cdfGamma": cdfGamma,
   "pdfBeta": pdfBeta, "cdfBeta": cdfBeta,
   "fs": fsa, "fa": fa, "fb": fb,
-  "comb": comb
+  "comb": comb,
 };
 
 var ftab4 = {
@@ -3786,6 +3786,12 @@ function calc(){
     }else{
       ans.innerHTML = "ans = ";
     }
+  }
+}
+
+function handle_keys(event){
+  if(event.keyCode==13){
+    plot();
   }
 }
 
