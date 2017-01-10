@@ -10,11 +10,12 @@ body{
   color: #463c20;
 }
 a{
-  color: #600030;
+  color: #204a60;
   text-decoration: none;
 }
 a:hover{
   text-decoration: underline;
+  color: #102040;
 }
 pre, code{
   font-family: "FreeMono", "Courier New", monospace;

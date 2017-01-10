@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
 <head>
   <meta charset="UTF-8">
@@ -32,18 +32,24 @@ onclick="shiftap(); isoplot()">
 &emsp;<span id="xy" class="mono"></span>
 <br><br>
 f(x,y) = <input type="text" id="inputf" style="width: 600px"
-value="x">
+value="x" onkeyup="handle_keys(event);">
 <br><br>
 <table>
 <tr><td style="padding-left: 0em">
-px = <input type="text" id="inputx" value="0"><br>
-py = <input type="text" id="inputy" value="0"><br>
-wx = <input type="text" id="inputwx" value="10"><br>
-wy = <input type="text" id="inputwy" value="10">
+px = <input type="text" id="inputx" value="0"
+  onkeyup="handle_keys(event);"><br>
+py = <input type="text" id="inputy" value="0"
+  onkeyup="handle_keys(event);"><br>
+wx = <input type="text" id="inputwx" value="10"
+  onkeyup="handle_keys(event);"><br>
+wy = <input type="text" id="inputwy" value="10"
+  onkeyup="handle_keys(event);">
 </td><td style="padding-left: 2em">
-a = <input type="text" id="inputa" value="0"><br>
+a = <input type="text" id="inputa" value="0"
+  onkeyup="handle_keys(event);"><br>
 d = <input type="text" id="inputd" value="1"><br>
-n = <input type="text" id="inputn" value="10">
+n = <input type="text" id="inputn" value="10"
+  onkeyup="handle_keys(event);">
 </td></tr>
 </table>
 <br>
@@ -51,7 +57,8 @@ n = <input type="text" id="inputn" value="10">
 (<a href="doc-de.htm" class="modest">Hilfe</a>)
 <br><br>
 <input type="button" value="calc" onclick="calc()">
-<input type="text" id="inputc" style="width:400px">
+<input type="text" id="inputc" style="width:400px"
+  onkeyup="calc_keys(event);">
 <br>
 <p id="ans" class="mono">ans =</p>
 <br><br>

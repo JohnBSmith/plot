@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
 <head>
   <meta charset="UTF-8">
@@ -34,7 +34,7 @@ onclick="shiftam(); iplot3d()">
 onclick="shiftap(); iplot3d()">
 <br><br>
 <input type="text" id="inputf" style="width: 600px"
-value = "x^2+y^2+z^2=1">
+value = "x^2+y^2+z^2=1" onkeyup="handle_keys(event);">
 <br><br>
 w = <input type="text" id="inputw" value="2">&emsp;
 a = <input type="text" id="inputa" value="0"><br>
@@ -42,14 +42,17 @@ m = <input type="text" id="inputm" value="1">&emsp;
 d = <input type="text" id="inputd" value="1">
 <br>
 phi = <input type="text" id="inputphi" value="0"><br>
-n = <input type="text" id="inputn" value="100"><br>
-h = <input type="text" id="inputh" value="0.2">
+n = <input type="text" id="inputn" value="100"
+  onkeyup="handle_keys(event);"><br>
+h = <input type="text" id="inputh" value="0.2"
+  onkeyup="handle_keys(event);">
 <br><br>
 <a href="doc.htm" class="modest">help</a>
 (<a href="doc-de.htm" class="modest">Hilfe</a>)
 <br><br>
 <input type="button" value="calc" onclick="calc()">
-<input type="text" id="inputc" style="width:400px">
+<input type="text" id="inputc" style="width:400px"
+  onkeyup="calc_keys(event);">
 <br>
 <p id="ans" class="mono">ans =</p>
 <br><br>

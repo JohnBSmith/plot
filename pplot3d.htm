@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
 <head>
   <meta charset="UTF-8">
@@ -36,33 +36,43 @@ onclick="shiftam(); pplot3d()">
 onclick="shiftap(); pplot3d()">
 <br><br>
 x(u,v) = <input type="text" id="inputx" style="width: 600px"
-value = "cos(u)sin(v)"><br>
+value = "cos(u)sin(v)" onkeyup="handle_keys(event);"><br>
 y(u,v) = <input type="text" id="inputy" style="width: 600px"
-value = "sin(u)sin(v)"><br>
+value = "sin(u)sin(v)" onkeyup="handle_keys(event);"><br>
 z(u,v) = <input type="text" id="inputz" style="width: 600px"
-value = "cos(v)">
+value = "cos(v)" onkeyup="handle_keys(event);">
 <br><br>
 <table>
 <tr><td style="padding-left: 0em">
-m = <input type="text" id="inputm" value="8"><br>
+m = <input type="text" id="inputm" value="8"
+  onkeyup="handle_keys(event);"><br>
 phi = <input type="text" id="inputphi" value="0">
 </td><td style="padding-left: 2em">
-a = <input type="text" id="inputa" value="0"><br>
+a = <input type="text" id="inputa" value="0"
+  onkeyup="handle_keys(event);"><br>
 d = <input type="text" id="inputd" value="1">
 </td>
 </table>
 <br>
 <table>
 <tr><td style="padding-left: 0em">
-u1 = <input type="text" id="inputu1" value="0"><br>
-u2 = <input type="text" id="inputu2" value="2pi"><br>
-mu = <input type="text" id="inputmu" value="20"><br>
-nu = <input type="text" id="inputnu" value="200">
+u1 = <input type="text" id="inputu1" value="0"
+  onkeyup="handle_keys(event);"><br>
+u2 = <input type="text" id="inputu2" value="2pi"
+  onkeyup="handle_keys(event);"><br>
+mu = <input type="text" id="inputmu" value="20"
+  onkeyup="handle_keys(event);"><br>
+nu = <input type="text" id="inputnu" value="200"
+  onkeyup="handle_keys(event);">
 </td><td style="padding-left: 2em">
-v1 = <input type="text" id="inputv1" value="0"><br>
-v2 = <input type="text" id="inputv2" value="pi"><br>
-mv = <input type="text" id="inputmv" value="20"><br>
-nv = <input type="text" id="inputnv" value="200">
+v1 = <input type="text" id="inputv1" value="0"
+  onkeyup="handle_keys(event);"><br>
+v2 = <input type="text" id="inputv2" value="pi"
+  onkeyup="handle_keys(event);"><br>
+mv = <input type="text" id="inputmv" value="20"
+  onkeyup="handle_keys(event);"><br>
+nv = <input type="text" id="inputnv" value="200"
+  onkeyup="handle_keys(event);">
 </td></tr>
 </table>
 <br>
@@ -70,7 +80,8 @@ nv = <input type="text" id="inputnv" value="200">
 (<a href="doc-de.htm" class="modest">Hilfe</a>)
 <br><br>
 <input type="button" value="calc" onclick="calc()">
-<input type="text" id="inputc" style="width:400px">
+<input type="text" id="inputc" style="width:400px"
+  onkeyup="calc_keys(event);">
 <br>
 <p id="ans" class="mono">ans =</p>
 <br><br>

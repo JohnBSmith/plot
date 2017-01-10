@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
 <head>
   <meta charset="UTF-8">
@@ -36,10 +36,10 @@ onclick="shiftam(); plot3d()">
 onclick="shiftap(); plot3d()">
 <br><br>
 f(x,y) = <input type="text" id="inputf" style="width: 600px"
-value = "">
+value = "" onkeyup="handle_keys(event);">
 <br>
 g(x,y) = <input type="text" id="inputg" style="width: 600px"
-value = "">
+value = "" onkeyup="handle_keys(event);">
 <br><br>
 w = <input type="text" id="inputw" value="10">&emsp;
 a = <input type="text" id="inputa" value="0"><br>
@@ -53,7 +53,8 @@ n = <input type="text" id="inputn" value="100">
 (<a href="doc-de.htm" class="modest">Hilfe</a>)
 <br><br>
 <input type="button" value="calc" onclick="calc()">
-<input type="text" id="inputc" style="width:400px">
+<input type="text" id="inputc" style="width:400px"
+  onkeyup="calc_keys(event);">
 <br>
 <p id="ans" class="mono">ans =</p>
 <br><br>

@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
 <head>
   <meta charset="UTF-8">
@@ -51,27 +51,27 @@ onclick="shiftap(); fractalplot()">
 &emsp;<span id="xy" class="mono"></span>
 <br><br>
 f(z) = <input type="text" id="inputf" style="width: 600px"
-  onkeypress="handle_keys(event);" value = "z^2+c">
+  onkeyup="handle_keys(event);" value = "z^2+c">
 <br>
 z0 = <input type="text" id="inputz0" style="width: 200px"
-  onkeypress="handle_keys(event);" value = "0">
+  onkeyup="handle_keys(event);" value = "0">
 <br><br>
 
 <table><tr><td style="padding-left: 0em">
 px = <input type="text" id="inputx" value="0"
-  onkeypress="handle_keys(event);"><br>
+  onkeyup="handle_keys(event);"><br>
 py = <input type="text" id="inputy" value="0"
-  onkeypress="handle_keys(event);"><br>
+  onkeyup="handle_keys(event);"><br>
 w = <input type="text" id="inputw" value="2"
-  onkeypress="handle_keys(event);"><br>
+  onkeyup="handle_keys(event);"><br>
 r = <input type="text" id="inputr" value="2"
-  onkeypress="handle_keys(event);">
+  onkeyup="handle_keys(event);">
 </td><td style="padding-left: 2em">
 a = <input type="text" id="inputa" value="0"
-  onkeypress="handle_keys(event);"><br>
+  onkeyup="handle_keys(event);"><br>
 d = <input type="text" id="inputd" value="1"><br>
 n = <input type="text" id="inputn" value="40"
-  onkeypress="handle_keys(event);">
+  onkeyup="handle_keys(event);">
 </td></tr>
 </table>
 <br>
@@ -79,7 +79,8 @@ n = <input type="text" id="inputn" value="40"
 (<a href="doc-de.htm" class="modest">Hilfe</a>)
 <br><br>
 <input type="button" value="calc" onclick="calc()">
-<input type="text" id="inputc" style="width:400px">
+<input type="text" id="inputc" style="width:400px"
+  onkeyup="calc_keys(event);">
 <br>
 <p id="ans" class="mono">ans =</p>
 <br><br>

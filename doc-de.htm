@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="de">
 <head>
   <meta charset="UTF-8">
@@ -116,8 +116,8 @@ list(a1,...,an), [a1,...,an]
 get(a,i)......das i-te Element aus der Liste a
 size(a).......Anzahl der Elemente von a
 cat(a,b)......verbindet die Listen a und b
-range(a,b)....erzeugt die Liste [a,a+1,...,b]
-range(a,b,d)..erzeugt die Liste [a,a+d,a+2d,...]
+range(a,b)....erzeugt die Liste [a,a+1,a+2,...,b]
+range(a,b,d)..erzeugt die Liste [a,a+d,a+2d,...,b]
 next(a).......wählt zyklisch ein Element aus der Liste a aus
 rand(a).......wählt zufällig ein Element aus der Liste a aus
 sum(a)........summiert alle Elemente der Liste a auf
@@ -138,6 +138,7 @@ table(f,a)....Wertetabelle für die Liste a
 apply(f,x)....Applikation von f auf x
 if(c,a,b).....wenn c, dann a, sonst b
 not(a)........logische Negation
+clamp(x,a,b)..min(max(x,a),b)
 
 <b>Gamma und Verwandte</b>
 fac(x)........Fakultät
@@ -156,8 +157,8 @@ hyperK(x).....K-Funktion
 bc(n,k).......Binomialkoeffizient
 ff(n,k).......fallende Faktorielle
 rf(n,k).......steigende Faktorielle
-bracket(n,k)..Stirling-Zahl der ersten Art
-brace(n,k)....Stirling-Zahl der zweiten Art
+s1(n,k).......Stirling-Zahl der ersten Art
+s2(n,k).......Stirling-Zahl der zweiten Art
 
 <b>Elliptische Integrale</b>
 K(m)..........vollständiges elliptisches Integral K(m=k^2)
@@ -374,7 +375,8 @@ Operatoren</h2>
 04 a%b.....a modulo b
 05 a+b.....a plus b
 05 a-b.....a minus b
-06 a:b.....[a,a+1,...,b]
+06 a:b.....[a, a+1, a+2, ..., b]
+06 a:b:d...[a, a+d, a+2d, ..., b]
 07 a&lt;b.....wenn a kleiner als b ist, dann 1, sonst 0
 07 a&gt;b.....wenn a größer als b ist, dann 1, sonst 0
 07 a&lt;=b....wenn a kleiner gleich b ist, dann 1, sonst 0
@@ -651,9 +653,9 @@ man g(0) in die Taschenrechnerzeile ein.
 <b>Wertetabellen</b>
 Eine Wertetabelle für f(x)=x^2 auf dem Intervall [0,4]
 erzeugt man durch die Eingabe von
-  table({x|x^2},range(0,4,0.1))
+  table({x|x^2},0:4:0.1)
 in der Taschenrechnerzeile. Alternativ schreibt man
-  map({x|[x,x^2]},range(0,4,0.1)).
+  map({x|[x,x^2]},0:4:0.1).
 
 <b>Zufallszahlen</b>
 Zufallszahlen, die einer bestimmten Verteilung folgen, lassen sich

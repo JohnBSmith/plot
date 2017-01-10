@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
 <head>
   <meta charset="UTF-8">
@@ -46,37 +46,44 @@ onclick="shiftam(); pplot()">
 onclick="shiftap(); pplot()">
 &emsp;<span id="xy" class="mono"></span>
 <br><br>
-x(t) = <input type="text" id="input1" style="width: 600px"
-  onkeypress="handle_keys(event);"><br>
-y(t) = <input type="text" id="input2" style="width: 600px"
-  onkeypress="handle_keys(event);"><br>
+fx(t) = <input type="text" id="inputfx" style="width: 600px"
+  onkeyup="handle_keys(event);"><br>
+fy(t) = <input type="text" id="inputfy" style="width: 600px"
+  onkeyup="handle_keys(event);"><br>
+gx(t) = <input type="text" id="inputgx" style="width: 600px"
+  onkeyup="handle_keys(event);"><br>
+gy(t) = <input type="text" id="inputgy" style="width: 600px"
+  onkeyup="handle_keys(event);"><br>
 <br>
 <table><tr><td>
 px = <input type="text" id="inputx" value="0"
-  onkeypress="handle_keys(event);"><br>
+  onkeyup="handle_keys(event);"><br>
 py = <input type="text" id="inputy" value="0"
-  onkeypress="handle_keys(event);"><br>
+  onkeyup="handle_keys(event);"><br>
 wx = <input type="text" id="inputwx" value="10"
-  onkeypress="handle_keys(event);"><br>
+  onkeyup="handle_keys(event);"><br>
 wy = <input type="text" id="inputwy" value="10"
-  onkeypress="handle_keys(event);">
+  onkeyup="handle_keys(event);">
 </td><td style="padding-left: 2em">
 t1 = <input type="text" id="inputt1" value="0"
-  onkeypress="handle_keys(event);"><br>
+  onkeyup="handle_keys(event);"><br>
 t2 = <input type="text" id="inputt2" value="2pi"
-  onkeypress="handle_keys(event);"><br>
-a = <input type="text" id="inputa" value="0"><br>
+  onkeyup="handle_keys(event);"><br>
+a = <input type="text" id="inputa" value="0"
+  onkeyup="handle_keys(event);"><br>
 d = <input type="text" id="inputd" value="1">
 </td></tr>
 </table>
 <br>
-n = <input type="text" id="inputn" value="1000">
+n = <input type="text" id="inputn" value="1000"
+  onkeyup="handle_keys(event);">
 <br><br>
 <a href="doc.htm" class="modest">help</a>
 (<a href="doc-de.htm" class="modest">Hilfe</a>)
 <br><br>
 <input type="button" value="calc" onclick="calc()">
-<input type="text" id="inputc" style="width:400px">
+<input type="text" id="inputc" style="width:400px"
+  onkeyup="calc_keys(event);">
 <br>
 <p id="ans" class="mono">ans =</p>
 <br><br>

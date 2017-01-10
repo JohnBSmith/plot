@@ -1049,6 +1049,10 @@ function calc_cop(stack,t){
     y = stack.pop();
     x = stack.pop();
     stack.push(crange(x,y));
+  }else if(c==RANGED){
+    y = stack.pop();
+    x = stack.pop();
+    stack.push(cranged(stack.pop(),x,y));
   }
 }
 
