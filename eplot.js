@@ -361,11 +361,13 @@ function solve(data,s,m,h){
   adg = compile(s);
   vcr=cr1; vcg=cg1; vcb=cb1;
   vx.value=x0;
+  var a=[], b=[];
   for(i=0; i<n; i++){
     vy[i].value=vy0[i];
   }
   for(i=1; i<m; i++){
     spoint(vx.value,vy[0].value);
+    a.push(vy[0].value);
     vx.value=x0+h*i;
     v[n-1] = evalv(adg)*h+vy[n-1].value;
     for(j=n-2; j>=0; j--){
@@ -379,6 +381,7 @@ function solve(data,s,m,h){
     vy[i].value=vy0[i];
   }
   for(i=1; i<m; i++){
+    b.push(vy[0].value);
     vx.value=x0-h*i;
     v[n-1] = -evalv(adg)*h+vy[n-1].value;
     for(j=n-2; j>=0; j--){
@@ -394,6 +397,11 @@ function solve(data,s,m,h){
   for(i=1; i<n; i++){
     delete vtab["y"+i];
   }
+  var yplus = interpolate_equidistant(x0,h,a);
+  var yminus = interpolate_equidistant(x0,-h,b);
+  return function(x){
+    return x<0? yminus(x): yplus(x);
+  };
 }
 
 function setn(){
@@ -429,7 +437,7 @@ function dplot(){
 
   s = gets("input1");
   if(s.length>0 && s[0]!='#'){
-    solve(data,s,m,h);
+    ftab["y"] = solve(data,s,m,h);
     flush();
   }
 

@@ -127,6 +127,7 @@ min(a)........Minimum von allen Elementen aus a
 rev(a)........umgedrehte Liste
 ipp(a)........Interpolationspolynom, a=[[x0,y0],...,[xn,yn]]
 fn(a).........stückweise lineare Interpolation
+fn(x0,d,a)....equidistante Stützstellen: [xk=x0+k*d, yk=a[k]]
 map(f,a)......appliziert die Funktion f auf alle Elemente aus a
 filter(f,a)...filtert Elemente aus a mit der Testfunktion f aus
 reduce(f,a)...reduziert a mit f(x,y)
@@ -139,6 +140,7 @@ apply(f,x)....Applikation von f auf x
 if(c,a,b).....wenn c, dann a, sonst b
 not(a)........logische Negation
 clamp(x,a,b)..min(max(x,a),b)
+sma(f,x,n,h)..zentraler gleitender Mittelwert
 
 <b>Gamma und Verwandte</b>
 fac(x)........Fakultät
@@ -711,6 +713,16 @@ Ein komplizierteres Beispiel:
 <b>Stückweise lineare Interpolation</b>
 Beispiel:
   f(x) = p(x); p:=fn([[0,0],[1,1],[2,0],[3,-1],[4,0]])
+
+<b>Stückweise lineare Interpolation, equidistante Stützstellen</b>
+Das letzte Beispiel hatte equidistante Stützstellen. Daher lässt sich
+ein einfacherer Algorithmus verwenden. Verwende:
+  fn(x0,d,[y0,y1,y2,y3,...,yn])
+D.h. man hat die Punkte:
+  [x0,y0], [x0+d,y1], [x0+2d,y2], [x0+3d,y3], ..., [x0+n*d,yn]
+Somit vereinfacht sich das letzte Beispiel zu:
+  f(x) = p(x); p:=fn(0,1,[0,1,0,-1,0])
+
 
 <b>Lineare Regression</b>
 Sei a eine Liste von Punkten [x,y].

@@ -30,13 +30,14 @@ var cftab = {
   "arcsin": casin, "arccos": cacos, "arctan": catan, "arccot": cacot,
   "sinh": csinh, "cosh": ccosh, "tanh": ctanh, "coth": ccoth,
   "asinh": casinh, "acosh": cacosh, "atanh": catanh, "acoth": cacoth,
+  "arsinh": casinh, "arcosh": cacosh, "artanh": catanh, "arcoth": cacoth,
   "gamma": cgamma, "fac": cfac, "digamma": cdigamma,
   "f": funf, "g": fung, "h": funh,
   "next": next, "rand": pick,
   "sum": csumlist, "prod": cprodlist,
   "zeta": czeta, "B": cbn,
   "erf": cerf, "erfc": cerfc, "Ei": cEi,
-  "K": eiK, "E": eiE,
+  "K": ceiK, "E": ceiE,
   "G": cBarnesG, "hyperK": chyperK,
   "compose": compose, "rev": rev,
   "size": csize, "isprime": cisprime
@@ -47,6 +48,7 @@ var cftab2 = {
   "log": clog, "apply": fapply,
   "cint": ccint, "vint": vint,
   "gamma": cigamma, "Gamma": ciGamma,
+  "ff": cffac, "rf": crfac,
   "En": cEn, "zeta": chzeta,
   "theta1": theta1, "theta2": theta2,
   "theta3": theta3, "theta4": theta4,
@@ -82,24 +84,15 @@ function complex(a,b){
 }
 
 function add(a,b){
-  var y = {};
-  y.re = a.re+b.re;
-  y.im = a.im+b.im;
-  return y;
+  return {re: a.re+b.re, im: a.im+b.im};
 }
 
 function sub(a,b){
-  var y = {};
-  y.re = a.re-b.re;
-  y.im = a.im-b.im;
-  return y;
+  return {re: a.re-b.re, im: a.im-b.im};
 }
 
 function mpy(a,b){
-  var y = {};
-  y.re = a.re*b.re-a.im*b.im;
-  y.im = a.re*b.im+b.re*a.im;
-  return y;
+  return {re: a.re*b.re-a.im*b.im, im: a.re*b.im+b.re*a.im};
 }
 
 function neg(a){
@@ -134,13 +127,14 @@ function div(a,b){
       return {re: Infinity, im: 1};
     }
   }
-  y.re = (a.re*b.re+a.im*b.im)/s;
-  y.im = (a.im*b.re-a.re*b.im)/s;
-  return y;
+  return{
+    re: (a.re*b.re+a.im*b.im)/s,
+    im: (a.im*b.re-a.re*b.im)/s
+  };
 }
 
 function cfnot(x){
-  return sub(complex(1,0),x);
+  return {re:1-x.re,im:-x.im};
 }
 
 function cabs(a){
@@ -159,49 +153,46 @@ function phase(a,r){
 
 function arg(a){
   var phi = phase(a,cabs(a));
-  return complex(phi,0);
+  return {re: phi, im: 0};
 }
 
 function ccabs(x){
-  return complex(cabs(x),0);
+  return {re: cabs(x), im: 0};
 }
 
 function csgn(x){
   var r = cabs(x);
-  if(r==0) return complex(0,0);
-  return div(x,complex(r,0));
+  if(r==0) return {re: 0, im: 0};
+  return divr(x,r);
 }
 
 function creal(x){
-  return complex(x.re,0);
+  return {re: x.re, im: 0};
 }
 
 function cimag(x){
-  return complex(x.im,0);
+  return {re: x.im, im: 0};
 }
 
 function cfloor(x){
-  return complex(Math.floor(x.re),0);
+  return {re: Math.floor(x.re), im: 0};
 }
 
 function cceil(x){
-  return complex(Math.ceil(x.re),0);
+  return {re: Math.ceil(x.re), im: 0};
 }
 
 function crd(x){
-  return complex(Math.round(x.re),0);
+  return {re: Math.round(x.re), im: 0};
 }
 
 function cmod(x,m){
-  return complex(mod(x.re,m.re),0);
+  return {re: mod(x.re,m.re), im: 0};
 }
 
 function cexp(x){
   var r = Math.exp(x.re);
-  var y={};
-  y.re = r*Math.cos(x.im);
-  y.im = r*Math.sin(x.im);
-  return y;
+  return {re: r*Math.cos(x.im), im: r*Math.sin(x.im)};
 }
 
 function cln(x){
@@ -211,7 +202,7 @@ function cln(x){
 }
 
 function clg(x){
-  return div(cln(x),complex(2.302585093,0));
+  return div(cln(x),{re: 2.302585093, im: 0});
 }
 
 function clog(x,b){
@@ -221,28 +212,24 @@ function clog(x,b){
 function csqrt(x){
   var r = cabs(x);
   var phi = phase(x,r);
-  var y = {};
   var ry = Math.sqrt(r);
-  y.re = ry*Math.cos(phi/2);
-  y.im = ry*Math.sin(phi/2);
-  return y;
+  return {re: ry*Math.cos(phi/2), im: ry*Math.sin(phi/2)};
 }
 
 function croot(n,x){
-  return cpow(x,div(complex(1,0),n));
+  return cpow(x,div({re:1,im:0},n));
 }
 
 function csin(x){
   var n = mpy(x,{re: 0, im: 1});
   var y = sub(cexp(n),cexp(neg(n)));
-  return div(y,{re: 0, im: 2});
-  return y;
+  return div(y,{re:0,im:2});
 }
 
 function ccos(x){
-  var n = mpy(x,{re: 0, im: 1});
+  var n = mpy(x,{re:0,im:1});
   var y = add(cexp(n),cexp(neg(n)));
-  return div(y,{re: 2, im: 0});
+  return divr(y,2);
 }
 
 function ctan(x){
@@ -270,67 +257,66 @@ function ccoth(x){
 }
 
 function casin(x){
-  var a = csqrt(sub(complex(1,0),mpy(x,x)));
-  var b = add(mpy(complex(0,1),x),a);
-  return mpy(complex(0,-1),cln(b));
+  var a = csqrt(rsub(1,mpy(x,x)));
+  var b = add(mpy({re:0,im:1},x),a);
+  return mpy({re:0,im:-1},cln(b));
 }
 
 function cacos(x){
-  var a = csqrt(sub(complex(1,0),mpy(x,x)));
-  var b = add(x,mpy(complex(0,1),a));
-  return mpy(complex(0,-1),cln(b));
+  var a = csqrt(rsub(1,mpy(x,x)));
+  var b = add(x,mpy({re:0,im:1},a));
+  return mpy({re:0,im:-1},cln(b));
 }
 
 function catan(x){
-  var a = mpy(complex(0,1),x);
-  var b = sub(cln(sub(complex(1,0),a)),cln(add(complex(1,0),a)));
-  return mpy(complex(0,1/2),b);
+  var a = mpy({re:0,im:1},x);
+  var b = sub(cln(rsub(1,a)),cln(addr(a,1)));
+  return mpy({re:0,im:1/2},b);
 }
 
 function cacot(x){
-  var a = div(complex(0,1),x);
-  var b = sub(cln(sub(complex(1,0),a)),cln(add(complex(1,0),a)));
-  return mpy(complex(0,1/2),b);
+  var a = div({re:0,im:1},x);
+  var b = sub(cln(rsub(1,a)),cln(addr(a,1)));
+  return mpy({re:0,im:1/2},b);
 }
 
 function casinh(x){
-  var a = csqrt(add(mpy(x,x),complex(1,0)));
+  var a = csqrt(addr(mpy(x,x),1));
   return cln(add(x,a));
 }
 
 function cacosh(x){
-  var a = csqrt(add(x,complex(1,0)));
-  var b = csqrt(sub(x,complex(1,0)));
+  var a = csqrt(addr(x,1));
+  var b = csqrt(addr(x,-1));
   return cln(add(x,mpy(a,b)));
 }
 
 function catanh(x){
-  var a = div(add(complex(1,0),x),sub(complex(1,0),x));
-  return mpy(complex(1/2,0),cln(a));
+  var a = div(addr(x,1),rsub(1,x));
+  return mpyr(cln(a),0.5);
 }
 
 function cacoth(x){
-  var a = div(add(x,complex(1,0)),sub(x,complex(1,0)));
-  return mpy(complex(1/2,0),cln(a));
+  var a = div(addr(x,1),addr(x,-1));
+  return mpyr(cln(a),0.5);
 }
 
 function cpow(x,n){
   if(x.re==0 && x.im==0){
-    if(n.re==0 && n.im==0) return complex(1,0);
-    return complex(0,0);
+    if(n.re==0 && n.im==0) return {re:1,im:0};
+    return {re:0,im:0};
   }
   return cexp(mpy(cln(x),n));
 }
 
 function cdiff(f,x){
-  var h = complex(0.0001,0);
-  var a = sub(f(add(x,h)),f(sub(x,h)));
-  var b = mpyr(h,2);
-  return div(a,b);
+  var h = 0.0001;
+  var a = sub(f({re:x.re+h,im:x.im}),f({re:x.re-h,im:x.im}));
+  return divr(a,2*h);
 }
 
 function cdiff2(f,x){
-  var h = complex(0.0001,0);
+  var h = {re:0.0001,im:0};
   var a = sub(add(f(add(x,h)),f(sub(x,h))),mpyr(f(x),2));
   var b = mpy(h,h);
   return div(a,b);
@@ -346,7 +332,7 @@ function cdiffn(f,x,n){
   }else if(m==2){
     return cdiff2(f,x);
   }else{
-    h=complex(0.1,0);
+    h={re:0.1,im:0};
     a = sub(cdiffn(f,add(x,h),addr(n,-1)),cdiffn(f,sub(x,h),addr(n,-1)));
     b = mpyr(h,2);
     return div(a,b);
@@ -378,20 +364,28 @@ function cgamma(x){
 }
 
 function cfac(x){
-  return cgamma(add(x,complex(1,0)));
+  return cgamma(addr(x,1));
+}
+
+function cffac(x,n){
+  return div(cgamma(addr(x,1)),cgamma(addr(sub(x,n),1)));
+}
+
+function crfac(x,n){
+  return div(cgamma(add(x,n)),cgamma(x));
 }
 
 function ccfGamma(a,x,n){
-  var y=complex(0,0);
+  var y={re:0,im:0};
   for(var k=n; k>=1; k--){
-    y=div(mpyr(sub(complex(k,0),a),k),addr(sub(sub(x,y),a),2*k+1));
+    y=div(mpyr(sub({re:k,im:0},a),k),addr(sub(sub(x,y),a),2*k+1));
   }
   return div(mpy(cexp(neg(x)),cpow(x,a)),addr(sub(sub(x,y),a),1));
 }
 
 function cpsgamma(a,x,n){
-  var y=complex(0,0);
-  var p=div(complex(1,0),a);
+  var y={re:0,im:0};
+  var p=div({re:1,im:0},a);
   for(var k=1; k<n; k++){
     y=add(y,p);
     p=div(mpy(p,x),addr(a,k));
@@ -406,7 +400,7 @@ function ciGamma(a,x){
     }
   }
   if(a.im==0 && a.re<=0 && a.re==Math.round(a.re)){
-    a=add(a,complex(0,1E-5));
+    a=add(a,{re:0,im:1E-5});
   }
   return sub(cgamma(a),cpsgamma(a,x,20));
 }
@@ -421,7 +415,7 @@ function cigamma(a,x){
 }
 
 function cerf(x){
-  var a=complex(0.5,0);
+  var a={re:0.5,im:0};
   var b=mpy(x,x);
   var y;
   if(cabs(x)<1.7){
@@ -445,11 +439,11 @@ function cerfc(x){
 }
 
 function cEn(n,x){
-  return mpy(cpow(x,addr(n,-1)),ciGamma(sub(complex(1,0),n),x));
+  return mpy(cpow(x,addr(n,-1)),ciGamma(sub({re:1,im:0},n),x));
 }
 
 function cEi(x){
-  return neg(ciGamma(complex(0,0),neg(x)));
+  return neg(ciGamma({re:0,im:0},neg(x)));
 }
 
 function cbn(x){
@@ -461,12 +455,12 @@ function cdigamma(x){
 }
 
 function czetam(s,N){
-  var y=complex(1,0);
+  var y={re:1,im:0};
   var ms = neg(s);
   for(var k=2; k<N; k++){
-    y=add(y,cpow(complex(k,0),ms));
+    y=add(y,cpow({re:k,im:0},ms));
   }
-  N=complex(N,0);
+  N={re:N,im:0};
   var a=mpy(s,mpy(addr(s,1),addr(s,2)));
   var b=mpy(a,mpy(addr(s,3),addr(s,4)));
   var c=mpy(b,mpy(addr(s,5),addr(s,6)));
@@ -483,7 +477,7 @@ function czeta(s){
   if(s.re>-1){
     return czetam(s,20);
   }else{
-    var a = mpy(cpow(complex(2*Math.PI,0),addr(s,-1)),csin(mpyr(s,Math.PI/2)));
+    var a = mpy(cpow({re:2*Math.PI,im:0},addr(s,-1)),csin(mpyr(s,Math.PI/2)));
     var b = addr(neg(s),1);
     return mpy(mpy(mpyr(a,2),cgamma(b)),czetam(b,20));
   }
@@ -499,14 +493,14 @@ function cLerch(z,s,x){
 }
 
 function chzetam(s,x,N){
-  var y={re: 0, im: 0};
+  var y={re:0,im:0};
   for(var k=0; k<N; k++){
-    y = add(y,div({re: 1, im: 0},cpow(addr(x,k),s)));
+    y = add(y,div({re:1,im:0},cpow(addr(x,k),s)));
   }
   var xpN = addr(x,N);
   var s2 = mpy(mpy(s,addr(s,1)),addr(s,2));
-  y = add(y,div(cpow(xpN,sub({re: 1, im: 0},s)),addr(s,-1)));
-  y = add(y,div({re: 1/2, im: 0},cpow(xpN,s)));
+  y = add(y,div(cpow(xpN,sub({re:1,im:0},s)),addr(s,-1)));
+  y = add(y,div({re:1/2,im:0},cpow(xpN,s)));
   y = add(y,div(mpyr(s,1/12),cpow(xpN,addr(s,1))));
   y = sub(y,div(mpyr(s2,1/720),cpow(xpN,addr(s,3))));
   return y;
@@ -518,7 +512,7 @@ function chzeta(s,x){
 
 function chyperK(x){
   var f = function(s){return chzeta(s,x);};
-  return cexp(addr(cdiff(f,{re: -1, im: 0}),0.1654211444));
+  return cexp(addr(cdiff(f,{re:-1,im:0}),0.1654211444));
 }
 
 function cBarnesG(x){
@@ -526,19 +520,19 @@ function cBarnesG(x){
 }
 
 function csum(f,a,b){
-  var s=complex(0,0);
+  var s={re:0,im:0};
   a=a.re; b=b.re;
   for(var k=a; k<=b; k++){
-    s=add(s,f(complex(k,0)));
+    s=add(s,f({re:k,im:0}));
   }
   return s;
 }
 
 function cprod(f,a,b){
-  var s=complex(1,0);
+  var s={re:1,im:0};
   a=a.re; b=b.re;
   for(var k=a; k<=b; k++){
-    s=mpy(s,f(complex(k,0)));
+    s=mpy(s,f({re:k,im:0}));
   }
   return s;
 }
@@ -554,18 +548,18 @@ function ccompose_pow(f,n,x){
 }
 
 function cfrac_pow(f,n,x){
-  var s=complex(0,0), m=10, y=x;
+  var s={re:0,im:0}, m=10, y=x;
   var a,b;
   if(n.re<0.5 && n.re==Math.round(n.re)){
     n.re+=0.001;
   }
   for(var k=0; k<=m; k++){
     a=bc(m,k)*Math.cos(Math.PI*(m-k));
-    b=mpyr(div(sub(n,complex(m,0)),sub(n,complex(k,0))),a);
+    b=mpyr(div(sub(n,{re:m,im:0}),sub(n,{re:k,im:0})),a);
     s=add(s,mpy(b,y));
     y=f(y);
   }
-  return mpy(cbc(n,complex(m,0)),s);
+  return mpy(cbc(n,{re:m,im:0}),s);
 }
 
 function cfpow(f,n,x){
@@ -577,14 +571,14 @@ function cfpow(f,n,x){
 }
 
 function csize(a){
-  return complex(a.length,0);
+  return {re:a.length,im:0};
 }
 
 function crange(a,b){
   a=a.re; b=b.re;
   var v=[];
   for(var k=a; k<=b; k++){
-    v.push(complex(k,0));
+    v.push({re:k,im:0});
   }
   return v;
 }
@@ -592,7 +586,7 @@ function crange(a,b){
 function cranged(a,b,d){
   var v = ranged(a.re,b.re,d.re);
   for(var i=0; i<v.length; i++){
-    v[i]=complex(v[i],0);
+    v[i]={re:v[i],im:0};
   }
   return v;
 }
@@ -619,10 +613,10 @@ function funh(x){
 
 function cintN(f,a,b,N){
   var re = function(t){
-    return f(complex(t,0)).re;
+    return f({re:t,im:0}).re;
   };
   var im = function(t){
-    return f(complex(t,0)).im;
+    return f({re:t,im:0}).im;
   };
   var x,y;
   x=gauss6(re,a.re,b.re,N);
@@ -636,11 +630,11 @@ function cint(f,a,b){
 
 function ccintN(f,gamma,N){
   var re = function(t){
-    t=complex(t,0);
+    t={re:t,im:0};
     return mpy(f(gamma(t)),cdiff(gamma,t)).re;
   };
   var im = function(t){
-    t=complex(t,0);
+    t={re:t,im:0};
     return mpy(f(gamma(t)),cdiff(gamma,t)).im;
   };
   var x,y;
@@ -660,9 +654,9 @@ function vintN(f,a,N){
   var g = function(t){
     return f(add(vint_a,mpy(vint_d,t)));
   }
-  var y=complex(0,0);
-  var t0=complex(0,0);
-  var t1=complex(1,0);
+  var y={re:0,im:0};
+  var t0={re:0,im:0};
+  var t1={re:1,im:0};
   for(var k=0; k+1<a.length; k++){
     vint_a=a[k]; vint_d=sub(a[k+1],a[k]);
     y=add(y,mpy(vint_d,cintN(g,t0,t1,N)));
@@ -713,11 +707,11 @@ function cmagm(x,y){
   return x;
 }
 
-function eiK(m){
+function ceiK(m){
   return div({re:0.5*Math.PI,im:0},cagm({re:1,im:0},csqrt(rsub(1,m))));
 }
 
-function eiE(m){
+function ceiE(m){
   var a={re:1,im:0}
   var b=rsub(1,m);
   var M=cagm(a,csqrt(b));
@@ -727,7 +721,7 @@ function eiE(m){
 
 function theta1(z,q){
   var k,a;
-  var y=complex(0,0);
+  var y={re:0,im:0};
   for(k=0; k<10; k++){
     a = mpy(cpow(q,{re: Math.pow(k+0.5,2), im: 0}),csin(mpyr(z,2*k+1)));
     y = add(y,mpyr(a,Math.cos(Math.PI*k)));
@@ -737,7 +731,7 @@ function theta1(z,q){
 
 function theta2(z,q){
   var k,a;
-  var y=complex(0,0);
+  var y={re:0,im:0};
   for(k=0; k<10; k++){
     a = mpy(cpow(q,{re: Math.pow(k+0.5,2), im: 0}),ccos(mpyr(z,2*k+1)));
     y = add(y,a);
@@ -747,7 +741,7 @@ function theta2(z,q){
 
 function theta3(z,q){
   var k,a;
-  var y=complex(0,0);
+  var y={re:0,im:0};
   for(k=1; k<10; k++){
     a = mpy(cpow(q,{re: k*k, im: 0}),ccos(mpyr(z,2*k)));
     y = add(y,a);
@@ -757,7 +751,7 @@ function theta3(z,q){
 
 function theta4(z,q){
   var k,a;
-  var y=complex(0,0);
+  var y={re:0,im:0};
   for(k=1; k<10; k++){
     a = mpy(cpow(q,{re: k*k, im: 0}),ccos(mpyr(z,2*k)));
     y = add(y,mpyr(a,Math.cos(Math.PI*k)));
@@ -769,8 +763,8 @@ function sn(z,k){
   var k1,K,K1,q,w;
   k=k.re;
   k1=Math.sqrt(1-k*k);
-  K=eiK(k);
-  K1=eiK(k1);
+  K=eiK(k*k);
+  K1=eiK(k1*k1);
   q={re: Math.exp(-Math.PI*K1/K), im: 0};
   w=div(mpyr(z,Math.PI),{re: 2*K, im: 0});
   return mpyr(div(theta1(w,q),theta4(w,q)),1/Math.sqrt(k));
@@ -780,8 +774,8 @@ function cn(z,k){
   var k1,K,K1,q,w;
   k=k.re;
   k1=Math.sqrt(1-k*k);
-  K=eiK(k);
-  K1=eiK(k1);
+  K=eiK(k*k);
+  K1=eiK(k1*k1);
   q={re: Math.exp(-Math.PI*K1/K), im: 0};
   w=div(mpyr(z,Math.PI),{re: 2*K, im: 0});
   return mpyr(div(theta2(w,q),theta4(w,q)),Math.sqrt(k1/k));
@@ -791,8 +785,8 @@ function dn(z,k){
   var k1,K,K1,q,w;
   k=k.re;
   k1=Math.sqrt(1-k*k);
-  K=eiK(k);
-  K1=eiK(k1);
+  K=eiK(k*k);
+  K1=eiK(k1*k1);
   q={re: Math.exp(-Math.PI*K1/K), im: 0};
   w=div(mpyr(z,Math.PI),{re: 2*K, im: 0});
   return mpyr(div(theta3(w,q),theta4(w,q)),Math.sqrt(k1));
@@ -809,7 +803,7 @@ function BarnesG(x){
 
 function cLaplace(f,x){
   var g = function(t){return mpy(f(t),cexp(neg(mpy(x,t))));};
-  return vint(g,[complex(0,0),complex(40,0)]);
+  return vint(g,[{re:0,im:0},{re:40,im:0}]);
 }
 
 function cfif(c,a,b){
@@ -829,7 +823,7 @@ function cfilter(f,a){
 }
 
 function crand(a,b){
-  return complex(rand(a.re,b.re),0);
+  return {re:rand(a.re,b.re),im:0};
 }
 
 function ccount(f,a){
@@ -837,25 +831,25 @@ function ccount(f,a){
   for(var i=0; i<a.length; i++){
     if(f(a[i]).re>=0.5) k++;
   }
-  return complex(k,0);
+  return {re:k,im:0};
 }
 
 function cforall(f,a){
   for(var i=0; i<a.length; i++){
-    if(f(a[i]).re<0.5) return complex(0,0);
+    if(f(a[i]).re<0.5) return {re:0,im:0};
   }
-  return complex(1,0);
+  return {re:1,im:0};
 }
 
 function cexists(f,a){
   for(var i=0; i<a.length; i++){
-    if(f(a[i]).re>=0.5) return complex(1,0);
+    if(f(a[i]).re>=0.5) return {re:1,im:0};
   }
-  return complex(0,0);
+  return {re:0,im:0};
 }
 
 function csumlist(a){
-  var s=complex(0,0);
+  var s={re:0,im:0};
   for(var i=0; i<a.length; i++){
     s=add(s,a[i]);
   }
@@ -863,7 +857,7 @@ function csumlist(a){
 }
 
 function cprodlist(a){
-  var p=complex(1,0);
+  var p={re:1,im:0};
   for(var i=0; i<a.length; i++){
     p=mpy(p,a[i]);
   }
@@ -875,7 +869,7 @@ function cfget(a,i){
 }
 
 function cisprime(x){
-  return complex(isprime(x.re),0);
+  return {re:isprime(x.re),im:0};
 }
 
 function fc(f,i,j){

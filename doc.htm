@@ -127,6 +127,7 @@ min(a)........minimum of all elements in the list a
 rev(a)........reversed list
 ipp(a)........interpolation polynomial, a=[[x0,y0],...,[xn,yn]]
 fn(a).........piecewise linear interpolation
+fn(x0,d,a)....piecewise linear interpolation, equidistant nodes
 map(f,a)......applys the function f to all elements in a
 filter(f,a)...filters elementes from the list a
 reduce(f,a)...reduces a with f(x,y)
@@ -139,6 +140,7 @@ apply(f,x)....application of f to x
 if(c,a,b).....if c then a else b
 not(a)........logical negation
 clamp(x,a,b)..min(max(x,a),b)
+sma(f,x,n,h)..central simple moving average
 
 <b>Gamma and related</b>
 fac(x)........factorial
@@ -696,6 +698,15 @@ A more complicated example:
 <b>Piecewise linear interpolation</b>
 Example:
   f(x) = p(x); p:=fn([[0,0],[1,1],[2,0],[3,-1],[4,0]])
+  
+<b>Piecewise linear interpolation, equidistant nodes</b>
+The last example has equidistant nodes. So one can use
+a simpler algorithm. The usage is:
+  fn(x0,d,[y0,y1,y2,y3,...,yn])
+That means, we have points:
+  [x0,y0], [x0+d,y1], [x0+2d,y2], [x0+3d,y3], ..., [x0+n*d,yn]
+The last example simplifies to:
+  f(x) = p(x); p:=fn(0,1,[0,1,0,-1,0])
 
 <b>Linear regression</b>
 Let a be a list of points [x,y].

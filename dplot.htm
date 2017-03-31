@@ -48,8 +48,10 @@ onclick="shiftam(); dplot()">
 onclick="shiftap(); dplot()">
 &emsp;<span id="xy" class="mono"></span>
 <br><br>
-<span id="yn">y1 = </span><input type="text" id="input1" style="width: 600px"><br>
-f(x) = <input type="text" id="inputf" style="width: 600px"><br>
+<span id="yn">y1 = </span><input type="text" id="input1" style="width: 600px"
+  onkeyup="handle_keys(event);"><br>
+f(x) = <input type="text" id="inputf" style="width: 600px"
+  onkeyup="handle_keys(event);"><br>
 <br>
 <table><tr><td>
 px = <input type="text" id="inputx" value="0"><br>
@@ -86,7 +88,8 @@ y8(x0) = <input type="text" id="inputy80" value="0">
 (<a href="doc-de.htm" class="modest">Hilfe</a>)
 <br><br>
 <input type="button" value="calc" onclick="calc()">
-<input type="text" id="inputc" style="width:400px">
+<input type="text" id="inputc" style="width:400px"
+  onkeyup="calc_keys(event);">
 <br>
 <p id="ans" class="mono">ans =</p>
 <br><br>
