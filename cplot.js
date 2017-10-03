@@ -76,7 +76,8 @@ var cftabn = {
   "sp": cspsys, "grid": csetgridtype,
   "save": save, "vline": cfvline, "hline": cfhline,
   "color": ccolor, "bcolor": cbcolor,
-  "ani": animate, "scatter": cscatter, "box": cbox
+  "ani": animate, "scatter": cscatter, "box": cbox,
+  "font": csetfont
 };
 
 function complex(a,b){
@@ -904,6 +905,12 @@ function cbcolor(stack,argc){
   bcr=color256(stack.pop().re);
 }
 
+function csetfont(stack,argc){
+  var n = stack.length;
+  stack[n-1] = stack[n-1].re;
+  setfont(stack,argc);
+}
+
 function csetw(stack,argc){
   var n = stack.length;
   stack[n-1]=stack[n-1].re;
@@ -1445,6 +1452,49 @@ function cpplot(){
       gcv1=complex(t,0);
       w=evalvc(af);
       spoint(w.re,w.im);
+    }
+    flush();
+  }
+
+  context.putImageData(img,0,0);
+  axisx(context,x1,shiftx);
+  axisy(context,y1,shifty);
+}
+
+function csplot(){
+  var x,y,px,py,w;
+  var shiftx,shifty;
+  var s,af;
+  var n,n0,N;
+  x1=0; y1=0;
+
+  pma = getnum("inputa");
+  x1 = getnum("inputx");
+  y1 = getnum("inputy");
+  wx = getnum("inputwx");
+  wy = getnum("inputwy");
+  n0 = getnum("inputn0");
+  N = getnum("inputN");
+  getgridtype();
+  getgridpos();
+
+  shiftx=0.1*wx;
+  shifty=0.1*wy;
+
+  init();
+  system();
+
+  s = gets("inputf");
+  if(s.length>0){
+    define("f",s);
+    af=gva;
+    vcr=cr1; vcg=cg1; vcb=cb1;
+    n=n0;
+    for(var k=0; k<N; k++){
+      gcv1=complex(n,0);
+      w=evalvc(af);
+      scatter_point(w.re,w.im);
+      n++;
     }
     flush();
   }

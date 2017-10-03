@@ -51,33 +51,51 @@ function point3d(m,c,s,x,y,z){
   fpsets(px,py);
 }
 
-function plotfn3d(a){
+function point3d_theta(m,c,s,ct,st,x,y,z){
+  var xt,yt,xp,yp,px,py;
+  xt = c*x-s*y;
+  yt = s*x+c*y;
+
+  var q = 1/Math.sqrt(2);
+  x = 0.5*(1+ct)*xt+0.5*(1-ct)*yt+q*st*z;
+  y = 0.5*(1-ct)*xt+0.5*(1+ct)*yt+q*st*z;
+  z = -q*st*xt-q*st*yt+ct*z;
+
+  xp = y-x;
+  yp = z-0.5*x-0.5*y;
+  px = psx+0.1*360*xp*m;
+  py = psy-0.1*360*yp*m;
+  fpsets(px,py);
+}
+
+function plotfn3d(a,tab){
   var x,y,z;
   var d,n,shift;
-  var w,m,c,s;
+  pma = tab.pma;
 
-  pma = getnum("inputa");
-  w = getnum("inputw")/10.0;
-  m = getnum("inputm")/2;
-  n = getnum("inputn");
-  phi = -(getnum("inputphi")-90)*Math.PI/180;
-  c = Math.cos(phi);
-  s = Math.sin(phi);
+  var w,m,c,s,ct,st,phi,theta;
+  w = tab.w; m = tab.m;
+  c = tab.c; ct = tab.ct;
+  s = tab.s; st = tab.st;
+  phi = tab.phi;
+  theta = tab.theta;
 
+  n = tab.n;
   shift=10/n;
+
   if(dgrid) d=0.5; else d=1;
   for(y=-10; y<=10; y+=d){
     for(x=-10; x<=10; x+=shift){
       gv1=w*x; gv2=w*y;
       z = evalv(a);
-      point3d(m,c,s,x,y,z/w);
+      point3d_theta(m,c,s,ct,st,x,y,z/w);
     }
   }
   for(x=-10; x<=10; x+=d){
     for(y=-10; y<=10; y+=shift){
       gv1=w*x; gv2=w*y;
       z = evalv(a);
-      point3d(m,c,s,x,y,z/w);
+      point3d_theta(m,c,s,ct,st,x,y,z/w);
     }
   }
 }
@@ -86,12 +104,27 @@ function plot3d(){
   var s,a;
   init();
 
+  var pma = getnum("inputa");
+  var w = getnum("inputw")/10.0;
+  var m = getnum("inputm")/2;
+  var n = getnum("inputn");
+  var phi = -(getnum("inputphi")-90)*Math.PI/180;
+  var theta = (getnum("inputtheta")-45)*Math.PI/180;
+  var cp = Math.cos(phi);
+  var sp = Math.sin(phi);
+  var ct = Math.cos(theta);
+  var st = Math.sin(theta);
+  var tab = {
+    pma: pma, w: w, m: m, n: n, phi: phi, theta: theta,
+    c: cp, s: sp, ct: ct, st: st
+  };
+
   s = gets("inputg");
   if(s.length>0 && s[0]!='#'){
     define2("g",s);
     a=gva;
     vcr=0xb0; vcg=0xb0; vcb=0xa0;
-    plotfn3d(a);
+    plotfn3d(a,tab);
   }
 
   s = gets("inputf");
@@ -99,7 +132,18 @@ function plot3d(){
     define2("f",s);
     a=gva;
     vcr=0x80; vcg=0x90; vcb=0xa0;
-    plotfn3d(a);
+    plotfn3d(a,tab);
+  }
+  
+  vcr=0; vcg=0; vcb=0;
+  for(var x=0; x<10.0; x+=0.01){
+    point3d_theta(0.5,cp,sp,ct,st,x,0,0);
+  }
+  for(var y=0; y<10.0; y+=0.01){
+    point3d_theta(0.5,cp,sp,ct,st,0,y,0);
+  }
+  for(var z=0; z<10.0; z+=0.01){
+    point3d_theta(0.5,cp,sp,ct,st,0,0,z);
   }
 
   context.putImageData(img,0,0);
@@ -658,3 +702,57 @@ function dsplot(){
   axisy(context,y1,shifty);
 }
 
+function plot3dcurve(){
+  var sx,sy,sz,fx,fy,fz,x,y,z;
+  init();
+
+  var pma = getnum("inputa");
+  var w = getnum("inputw")/10.0;
+  var m = getnum("inputm")/2;
+  var n = getnum("inputn");
+  var t1 = getnum("inputt1");
+  var t2 = getnum("inputt2");
+  var dt=(t2-t1)/n;
+  var phi = -(getnum("inputphi")-90)*Math.PI/180;
+  var theta = (getnum("inputtheta")-45)*Math.PI/180;
+  var cp = Math.cos(phi);
+  var sp = Math.sin(phi);
+  var ct = Math.cos(theta);
+  var st = Math.sin(theta);
+  var tab = {
+    pma: pma, w: w, m: m, n: n, phi: phi, theta: theta,
+    c: cp, s: sp, ct: ct, st: st
+  };
+
+  sx = gets("inputx");
+  sy = gets("inputy");
+  sz = gets("inputz");
+  if(sx.length>0 && sx[0]!='#'){
+    fx = define("x",sx);
+    fy = define("y",sy);
+    fz = define("z",sz);
+    vcr=0x80; vcg=0xa0; vcb=0xa0;
+    for(var t=t1; t<t2; t+=dt){
+      x = fx(t); y = fy(t); z = fz(t);
+      point3d_theta(m,cp,sp,ct,st,x,y,0);
+    }
+    vcr=cr1; vcg=cg1; vcb=cb1;
+    for(var t=t1; t<t2; t+=dt){
+      x = fx(t); y = fy(t); z = fz(t);
+      point3d_theta(m,cp,sp,ct,st,x,y,z/w);
+    }
+  }
+  
+  vcr=0xa8; vcg=0xa8; vcb=0xa0;
+  for(x=0; x<10.0; x+=0.01){
+    point3d_theta(0.5,cp,sp,ct,st,x,0,0);
+  }
+  for(y=0; y<10.0; y+=0.01){
+    point3d_theta(0.5,cp,sp,ct,st,0,y,0);
+  }
+  for(z=0; z<10.0; z+=0.01){
+    point3d_theta(0.5,cp,sp,ct,st,0,0,z);
+  }
+
+  context.putImageData(img,0,0);
+}

@@ -16,6 +16,9 @@ var cr2=0, cg2=0x60, cb2=0;
 // line color 3
 var cr3=0x80, cg3=0, cb3=0x80;
 
+// font of the scale
+var font = "12px \"FreeMono\", \"Courier New\", monospace";
+
 var dw=720, dwh=dw/2;
 var dh=480, dhh=dh/2;
 var psx=dwh;
@@ -140,7 +143,8 @@ var ftab2 = {
   "pmfLog": pmfLog, "cdfLog": cdfLog,
   "pdfExp": pdfExp, "cdfExp": cdfExp,
   "pdfchisq": pdfchisq, "cdfchisq": cdfchisq,
-  "pdfst": pdfst, "cdfst": cdfst
+  "pdfst": pdfst, "cdfst": cdfst,
+  "primes": primes, "cprod": cartesian_prod
 };
 
 var ftab3 = {
@@ -184,7 +188,8 @@ var ftabn = {
   "grid": setgridtype, "setp": setp,
   "short": short, "save": save,
   "ani": animate, "hsl": colorHSL,
-  "scatter": scatter, "box": box
+  "scatter": scatter, "box": box,
+  "font": setfont
 };
 
 function isalpha(s){
@@ -1391,6 +1396,16 @@ function prodlist(a){
   return p;
 }
 
+function cartesian_prod(a,b){
+  var p=[];
+  for(var i=0; i<a.length; i++){
+    for(var j=0; j<a.length; j++){
+      p.push([a[i],b[j]]);
+    }
+  }
+  return p;
+}
+
 function compose(a){
   var f = function(x){
     var y=x;
@@ -1733,6 +1748,13 @@ function short(stack,argc){
   shortmode=Math.round(stack.pop());
 }
 
+function setfont(stack,argc){
+  if(argc!=1){
+    error("Error: short(n) takes exactly one argument.");
+  }
+  font = Math.round(stack.pop())+"px \"DejaVu Sans\", monospace";
+}
+
 function save(stack,argc){
 	var s = canvas.toDataURL("image/png");
   var img = "<img src=\""+s+"\"/>";
@@ -2046,6 +2068,14 @@ function isprime(n){
     if(n%k==0) return 0;
   }
   return 1;
+}
+
+function primes(m,n){
+  var a = [];
+  for(var i=m; i<=n; i++){
+    if(isprime(i)) a.push(i);
+  }
+  return a;
 }
 
 function pcf(x){
@@ -3084,23 +3114,34 @@ function box_draw(x,y){
 
 function format(x,w){
   w=Math.abs(w);
-  if(Math.abs(x)<0.1 || Math.abs(x)>=100){
+  var sgn="";
+  var y;
+  if(x<0){
+    sgn="\u2212";
+    x=-x;
+  }
+  if(x<0.1 || x>=100){
     if(w>1E-12 && Math.round(x*1E14)==0){
-      return x.toFixed(2);
+      y=x.toFixed(2);
+    }else{
+      y = x.toExponential(2).toUpperCase();
     }
-    return x.toExponential(2).toUpperCase();
   }else{
     if(w<0.09){
       if(w<0.0009){
         if(w<0.00009){
-          return x.toFixed(6);
+          y = x.toFixed(6);
+        }else{
+          y = x.toFixed(5);
         }
-        return x.toFixed(5);
+      }else{
+        y = x.toFixed(4);
       }
-      return x.toFixed(4);
+    }else{
+      y = x.toFixed(2);
     }
-    return x.toFixed(2);
   }
+  return sgn+y;
 }
 
 function xbar(x,a,context){
@@ -3361,7 +3402,7 @@ function getgridpos(){
 function init(){
   canvas = document.getElementById("canvas1");
   context = canvas.getContext("2d");
-  context.font = "12px \"FreeMono\", \"Courier New\", monospace";
+  context.font = font;
   context.clearRect(0,0,dw,dh);
   img = context.createImageData(dw,dh);
   data = img.data;

@@ -7,21 +7,52 @@
 </head>
 <body>
 
-<p><a href="doc-de.htm">DE</a> | <a href="home.htm">Home</a>
+<p><a href="doc-de.htm">De</a> | <a href="home.htm">Home</a>
 </p>
 <h1>Function grapher manual</h1>
 
 <h2 id="toc">Table of contents</h2>
-<ul>
-<li><a href="#Constants">Constants</a>
-<li><a href="#Functions">List of functions</a>
-<li><a href="#CFun">Complex functions</a>
-<li><a href="#Operators">Operators</a>
-<li><a href="#Syntax">Syntax and semantics</a>
-<li><a href="#Graphers">The graphers in detail</a>
-<li><a href="#Examples">Examples</a>
-<li><a href="#Advanced">Advanced</a>
-</ul>
+<ol>
+<li><b><a href="#Constants">Constants</a></b>
+<li><b><a href="#Functions">Functions</a></b>
+  <ol class="modest">
+  <li><a href="#Basic">Basic functions</a>
+  <li><a href="#Trigonometric">Trigonometric functions</a>
+  <li><a href="#Hyperbolic">Hyperbolic functions</a>
+  <li><a href="#Wave">Wave forms</a>
+  <li><a href="#Analysis">Analysis</a>
+  <li><a href="#Enhancement">Enhancement functions</a>
+  <li><a href="#Gamma">Gamma and related</a>
+  <li><a href="#Combinatorical">Combinatorical functions</a>
+  <li><a href="#Elliptic-integrals">Elliptic integrals and related</a>
+  <li><a href="#Antiderivatives">Antiderivatives</a>
+  <li><a href="#Bessel">Bessel and related</a>
+  <li><a href="#Hypergeometric">Hypergeometric functions</a>
+  <li><a href="#Zeta">Zeta and related</a>
+  <li><a href="#Polynomial">Polynomial functions</a>
+  <li><a href="#Fourier">Fourier analysis</a>
+  <li><a href="#Functional-analysis">Functional analysis</a>
+  <li><a href="#Other">Other functions</a>
+  <li><a href="#Number-theoretic">Number theoretic functions</a>
+  <li><a href="#Statistical">Statistical functions</a> 
+  </ol>
+<li><b><a href="#CFunctions">Complex functions</a></b>
+  <ol class="modest">
+  <li><a href="#CBasic">Basic functions</a>
+  <li><a href="#CTrigonometric">Trigonometric functions</a>
+  <li><a href="#CHyperbolic">Hyperbolic functions</a>
+  <li><a href="#CAnalysis">Complex analysis</a>
+  <li><a href="#Gamma">Gamma and related</a>
+  <li><a href="#CAntiderivatives">Antiderivatives</a>
+  <li><a href="#CZeta">Zeta and related</a>
+  <li><a href="#COther">Other</a> 
+  </ol>
+<li><b><a href="#Operators">Operators</a></b>
+<li><b><a href="#Syntax">Syntax and semantics</a></b>
+<li><b><a href="#Graphers">The graphers in detail</a></b>
+<li><b><a href="#Examples">Examples</a></b>
+<li><b><a href="#Advanced">Advanced</a></b>
+</ol>
 
 <h2 id="Constants">
 Constants</h2>
@@ -32,10 +63,9 @@ gc.....Euler-Mascheroni constant
 deg....pi/180
 </pre>
 
-<h2 id="Functions">
-List of functions</h2>
+<h2 id="Functions">Functions</h2>
 <pre>
-<b>Basic functions</b>
+<b id="Basic">Basic functions</b>
 abs(x)........absolute value
 sgn(x)........signum function
 sqrt(x).......square root
@@ -55,7 +85,7 @@ lg(x).........decadic logarithm
 ld(x).........logarithm to base two
 log(x,b)......logarithm to base b
 
-<b>Trigonometric</b>
+<b id="Trigonometric">Trigonometric functions</b>
 sin(x)........sine
 cos(x)........cosine
 tan(x)........tangent
@@ -74,7 +104,7 @@ gd(x).........Gudermann function
 hypot(x,y)....length of the coordinate vector (x,y)
 angle(x,y)....angle of the coordinate vector (x,y)
 
-<b>Hyperbolic</b>
+<b id="Hyperbolic">Hyperbolic functions</b>
 sinh(x).......sine hyperbolicus
 cosh(x).......cosine hyperbolicus
 tanh(x).......tangent hyperbolicus
@@ -89,7 +119,7 @@ acoth(x)......area cotangent hyperbolicus
 asech(x)......area secant hyperbolicus
 acsch(x)......area cosecant hyperbolicus
 
-<b>Wave forms</b>
+<b id="Wave">Wave forms</b>
 twave(x,p)....triangle wave, p-periodic
 ptwave(x,p)...positive triangle wave, p-periodic
 sqwave(x,p)...square wave, p-periodic
@@ -97,7 +127,7 @@ psqwave(x,p)..positive square wave, p-periodic
 stwave(x,p)...sawtooth wave, p-periodic
 pstwave(x,p)..positive sawtooth wave, p-periodic
 
-<b>Numerical analysis</b>
+<b id="Analysis">Analysis</b>
 diff(f,x).....derivative of f at x
 diff(f,x,2)...second derivative of f at x
 diff(f,x,n)...nth derivative of f at x
@@ -110,9 +140,8 @@ rand(a,b).....random number in the interval [a,b)
 inv(f,x)......inverse function f^(-1)(x)
 inv(f,x,a,b)..f^(-1)(x) for f defined on [a,b]
 
-<b>Enhancement functions</b>
-list(a1,...,an), [a1,...,an]
-..............constructs a list from the values a1,...,an
+<b id="Enhancement">Enhancement functions</b>
+[a1,...,an]...constructs a list from the values a1,...,an
 get(a,i)......element number i of the list a
 size(a).......number of elements in the list a
 cat(a,b)......concatenates the lists a and b
@@ -142,7 +171,7 @@ not(a)........logical negation
 clamp(x,a,b)..min(max(x,a),b)
 sma(f,x,n,h)..central simple moving average
 
-<b>Gamma and related</b>
+<b id="Gamma">Gamma and related</b>
 fac(x)........factorial
 gamma(x)......gamma function
 digamma(x)....digamma function
@@ -155,14 +184,14 @@ I(x,a,b)......B(x,a,b)/B(a,b)
 G(x)..........Barnes G-function
 hyperK(x).....K-function
 
-<b>Combinatorical functions</b>
+<b id="Combinatorical">Combinatorical functions</b>
 bc(n,k).......binomial coefficient
 ff(n,k).......falling factorial
 rf(n,k).......raising factorial
 s1(n,k).......Stirling number of the first kind
 s2(n,k).......Stirling number of the second kind
 
-<b>Elliptic integrals and related</b>
+<b id="Elliptic-integrals">Elliptic integrals and related</b>
 K(m)..........complete elliptic integral K(m=k^2)
 E(m)..........complete elliptic integral E(m=k^2)
 F(phi,m)......incomplete elliptic integral F(phi,m=k^2)
@@ -175,7 +204,7 @@ RD(x,y,z).....shorthand for RJ(x,y,z,z)
 agm(a,b)......arithmetic-geometric mean
 magm(a,b).....modified arithmetic-geometric mean
 
-<b>Antiderivatives</b>
+<b id="Antiderivatives">Antiderivatives</b>
 Ei(x).........exponential integral
 En(n,x).......exponential integral E[n](x)
 li(x).........integral logarithm
@@ -183,7 +212,7 @@ Li(x).........integral logarithm with offset li(2)
 Si(x).........sine integral
 Ci(x).........cosine integral
 
-<b>Bessel and related</b>
+<b id="Bessel">Bessel and related</b>
 BJ(a,x).......Bessel function J[a](x)
 BY(a,x).......Bessel function Y[a](x)
 Bj(a,x).......spherical Bessel function j[a](x)
@@ -193,13 +222,13 @@ BK(a,x).......modified Bessel function K[a](x)
 Ai(x).........Airy function Ai(x)
 Bi(x).........Airy function Bi(x)
 
-<b>Hypergeometric functions</b>
+<b id="Hypergeometric">Hypergeometric functions</b>
 F([a1,...,am],[b1,...,bn],x)
 ..............hypergeometric function
 M(a,b,x)......confluent hypergeometric function M(a,b,x)
 U(a,b,x)......confluent hypergeometric function U(a,b,x)
 
-<b>Zeta and related</b>
+<b id="Zeta">Zeta and related</b>
 zeta(s).......zeta function
 zeta(s,a).....Hurzwitz zeta function
 Phi(x,s,a)....Lerch transcendent
@@ -207,14 +236,14 @@ Li(s,x).......polylogarithm Li[s](x)
 B(k)..........Bernoulli number, B(1)=+1/2
 Bm(k).........Bernoulli number, Bm(1)=-1/2
 
-<b>Polynomial functions</b>
+<b id="Polynomial">Polynomial functions</b>
 PP(n,a,x).....Legendre polynomial P[n,a](x)
 PL(n,a,x).....Laguerre polynomial L[n,a](x)
 PH(n,x).......Hermite polynomial H[n](x)
 PT(n,x).......Chebyshev polynomial T[n](x)
 PU(n,x).......Chebyshev polynomial U[n](x)
 
-<b>Fourier analysis</b>
+<b id="Fourier">Fourier analysis</b>
 fa(f,i,j).....Fourier coefficients a[i] upto a[j]
 fb(f,i,j).....Fourier-coefficients b[i] upto b[j]
 fs(x,a0,a,b)..Fourier series, a=[a1,a2,...], b=[b1,b2,...]
@@ -223,7 +252,7 @@ Fs(f,x).......sine transform, x in Hz
 Fc(f,x).......cosine transform, x in Hz
 comb(x,a,p)...Dirac comb of sharpness a und period p
 
-<b>Functional analysis</b>
+<b id="Functional-analysis">Functional analysis</b>
 sinc(x).......cardinal sine: sin(pi*x)/(pi*x)
 delta(x,a)....Dirac delta function
 L(f,x)........Laplace transform
@@ -232,22 +261,23 @@ D(f,x,r)......fractional derivative (D^r)(f)(x)
 J(f,a,x,r)....Riemann-Liouville integral (J[a]^r)(f)(x)
 J2(f,a,x,r)...Riemann-Liouville integral, alternative algorithm
 
-<b>Other functions</b>
+<b id="Other">Other functions</b>
 W(x)..........Lambert W-function, upper branch
 Wm1(x)........Lambert W-function, lower branch
 
-<b>Number theoretic functions</b>
+<b id="Number-theoretic">Number theoretic functions</b>
 pm(x,n,m).....modular power
 gcd(a,b)......greatest common divisor
 lcm(a,b)......least common multiple
 isprime(n)....prime number test
+primes(m,n)...the list of prime numbers between m and n
 factor(n).....prime number factorization
 pcf(n)........prime number counting function pi(n)
 phi(n)........Euler's totient function
 lambda(n).....Carmichael function
 sigma(n,k)....divisor function sigma[k](n)
 
-<b>Statistical functions</b>
+<b id="Statistical">Statistical functions</b>
 erf(x)........error function
 norm(x).......cumulative standard normal distribution
 mean(a).......arithmetic mean of the elements of a
@@ -284,11 +314,10 @@ pdfBeta(p,q,x)...Beta distribution, PDF
 cdfBeta(p,q,x)...Beta distribution, CDF
 </pre>
 
-<h2 id="CFun">
-Complex functions</h2>
+<h2 id="CFunctions">Complex functions</h2>
 
 <pre>
-<b>Basic functions</b>
+<b id="CBasic">Basic functions</b>
 re(z).........real part
 im(z).........imaginary part
 conj(z).......conjugation
@@ -302,7 +331,7 @@ ln(z).........natural logarithm
 lg(z).........decadic logarithm
 log(z,b)......logarithm to base b
 
-<b>Trigonometric</b>
+<b id="CTrigonometric">Trigonometric functions</b>
 sin(z)........sine
 cos(z)........cosine
 tan(z)........tangent
@@ -313,7 +342,7 @@ acos(z).......arc cosine
 atan(z).......arc tangent
 acot(z).......arc cotangent
 
-<b>Hyperbolic</b>
+<b id="CHyperbolic">Hyperbolic functions</b>
 sinh(z).......sine hyperbolicus
 cosh(z).......cosine hyperbolicus
 tanh(z).......tangent hyperbolicus
@@ -324,36 +353,36 @@ acosh(z)......area cosine hyperbolicus
 atanh(z)......area tangent hyperbolicus
 acoth(z)......area cotangent hyperbolicus
 
-<b>Complex analysis</b>
+<b id="CAnalysis">Complex analysis</b>
 diff(f,z).....complex derivative
 diff(f,z,n)...nth complex derivative
 int(f,a,b)....integral(from a to b) f(t) dt
 cint(f,g).....contour integral(from g(0) to g(1)) f(z) dz
 vint(f,a).....contour integral(from get(a,1) to get(a,n)) f(z) dz
 
-<b>Gamma and related</b>
+<b id="Gamma">Gamma and related</b>
 fac(z)........factorial
 gamma(z)......gamma function
 digamma(z)....digamma function
 gamma(s,z)....lower incomplete gamma function
 Gamma(s,z)....upper incomplete gamma function
 
-<b>Elliptic integrals and related</b>
+<b id="CElliptic-integrals">Elliptic integrals and related</b>
 K(m)..........complete elliptic integral K(m=k^2)
 E(m)..........complete elliptic integral E(m=k^2)
 
-<b>Antiderivatives</b>
+<b id="CAntiderivatives">Antiderivatives</b>
 erf(z)........error function
 Ei(z).........exponential integral
 En(n,z).......exponential integral E[n](z)
 
-<b>Zeta and related</b>
+<b id="CZeta">Zeta and related</b>
 zeta(s).......zeta function
 zeta(s,a).....Hurzwitz zeta function
 Phi(x,s,a)....Lerch transcendent
 B(k)..........Bernoulli number
 
-<b>Other</b>
+<b id="COther">Other</b>
 theta1(z,q)...theta function theta1(z,q)
 theta2(z,q)...theta function theta2(z,q)
 theta3(z,q)...theta function theta3(z,q)
@@ -607,7 +636,7 @@ complex, add the line
   evalsc("p:={x|2*x}");
 to the end of the file "cplot.js" instead.
 
-A function may be programmed in Javascript to extend the list
+A function may be programmed in JavaScript to extend the list
 of predefined functions. To achieve the function is available,
 add the following code to the end of the file "plot.js".
 

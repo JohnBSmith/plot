@@ -20,7 +20,7 @@ td{
   white-space: nowrap;
 }
 input[type="text"]{
-  font-family: "Free Mono", "Courier New", monospace;
+  font-family: "FreeMono", "Courier New", monospace;
   color: #202020;
   font-size: 100%;
 }

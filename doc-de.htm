@@ -7,21 +7,53 @@
 </head>
 <body>
 
-<p><a href="doc.htm">EN</a> | <a href="home-de.htm">Home</a>
+<p><a href="doc.htm">En</a> | <a href="home-de.htm">Home</a>
 </p>
 <h1>Anleitung zu den Plottern</h1>
 
 <h2 id="toc">Inhaltsverzeichnis</h2>
-<ul>
-<li><a href="#Konstanten">Konstanten</a>
-<li><a href="#Funktionen">Liste von Funktionen</a>
-<li><a href="#KFkt">Komplexe Funktionen</a>
-<li><a href="#Operatoren">Operatoren</a>
-<li><a href="#Syntax">Syntax und Semantik</a>
-<li><a href="#Plotter">Die jeweiligen Plotter im Einzelnen</a>
-<li><a href="#Beispiele">Beispiele</a>
-<li><a href="#Fortgeschritten">Fortgeschrittene Anwendung</a>
-</ul>
+<ol>
+<li><b><a href="#Konstanten">Konstanten</a></b>
+<li><b><a href="#Funktionen">Verfügbare Funktionen</a></b>
+  <ol class="modest">
+  <li><a href="#Elementare">Elementare Funktionen</a>
+  <li><a href="#Trigonometrische">Trigonometrische Funktionen</a>
+  <li><a href="#Hyperbolische">Hyperbolische Funktionen</a>
+  <li><a href="#Schwingungen">Schwingungen</a>
+  <li><a href="#Analysis">Analysis</a>
+  <li><a href="#Hilfsfunktionen">Hilfsfunktionen</a>
+  <li><a href="#Gamma">Gamma und Verwandte</a>
+  <li><a href="#Kombinatorische">Kombinatorische</a>
+  <li><a href="#Elliptische-Integrale">Elliptische Integrale</a>
+  <li><a href="#Integralfunktionen">Integralfunktionen</a>
+  <li><a href="#Bessel">Bessel-Funktionen und Verwandte</a>
+  <li><a href="#Hypergeometrische">Hypergeometrische Funktionen</a>
+  <li><a href="#Zeta">Zeta und Verwandte</a>
+  <li><a href="#Polynomfunktionen">Polynomfunktionen</a>
+  <li><a href="#Fourier">Fourier-Analysis</a>
+  <li><a href="#Funktionalanalysis">Funktionalanalysis</a>
+  <li><a href="#Sonstige">Sonstige</a>
+  <li><a href="#Zahlentheorie">Zahlentheorie</a>
+  <li><a href="#Statistik">Statistik</a>
+  </ol>
+<li><b><a href="#KFunktionen">Komplexe Funktionen</a></b>
+  <ol class="modest">
+  <li><a href="#KElementare">Elementare Funktionen</a>
+  <li><a href="#KTrigonometrische">Trigonometrische Funktionen</a>
+  <li><a href="#KHyperbolische">Hyperbolische Funktionen</a>
+  <li><a href="#KAnalysis">Analysis</a>
+  <li><a href="#KGamma">Gamma</a>
+  <li><a href="#KElliptische-Integrale">Elliptische Integrale</a>
+  <li><a href="#KIntegralfunktionen">Integralfunktionen</a>
+  <li><a href="#KZeta">Zeta und Verwandte</a>
+  <li><a href="#KSonstige">Sonstige</a>
+  </ol>
+<li><b><a href="#Operatoren">Operatoren</a></b>
+<li><b><a href="#Syntax">Syntax und Semantik</a></b>
+<li><b><a href="#Plotter">Die jeweiligen Plotter im Einzelnen</a></b>
+<li><b><a href="#Beispiele">Beispiele</a></b>
+<li><b><a href="#Fortgeschritten">Fortgeschrittene Anwendung</a></b>
+</ol>
 
 <h2 id="Konstanten">
 Konstanten</h2>
@@ -33,9 +65,9 @@ grad...pi/180
 </pre>
 
 <h2 id="Funktionen">
-Liste von Funktionen</h2>
+Verfügbare Funktionen</h2>
 <pre>
-<b>Elementare</b>
+<b id="Elementare">Elementare Funktionen</b>
 abs(x)........Betrag
 sgn(x)........Signum
 sqrt(x).......Wurzel
@@ -55,7 +87,7 @@ lg(x).........dekadischer Logarithmus
 ld(x).........Logarithmus zur Basis zwei
 log(x,b)......Logarithmus zur Basis b
 
-<b>Trigonometrische</b>
+<b id="Trigonometrische">Trigonometrische Funktionen</b>
 sin(x)........Sinus
 cos(x)........Kosinus
 tan(x)........Tangens
@@ -74,7 +106,7 @@ gd(x).........Gudermann-Funktion
 hypot(x,y)....Länge des Koordinatenvektors (x,y)
 angle(x,y)....Winkel des Koordinatenvektors (x,y)
 
-<b>Hyperbolische</b>
+<b id="Hyperbolische">Hyperbolische Funktionen</b>
 sinh(x).......Sinus Hyperbolicus
 cosh(x).......Kosinus Hyperbolicus
 tanh(x).......Tangens Hyperbolicus
@@ -89,7 +121,7 @@ acoth(x)......Area Kotangens Hyperbolicus
 asech(x)......Area Sekans Hyperbolicus
 acsch(x)......Area Kosekans Hyperbolicus
 
-<b>Schwingungen</b>
+<b id="Schwingungen">Schwingungen</b>
 twave(x,p)....Dreieckschwingung, p-periodisch
 ptwave(x,p)...positive Dreieckschwingung, p-periodisch
 sqwave(x,p)...Rechteckschwingung, p-periodisch
@@ -97,7 +129,7 @@ psqwave(x,p)..positive Rechteckschwingung, p-periodisch
 stwave(x,p)...Sägezahnschwingung, p-periodisch
 pstwave(x,p)..positive Sägezahnschwingung, p-periodisch
 
-<b>Analysis</b>
+<b id="Analysis">Analysis</b>
 diff(f,x).....Ableitung von f an der Stelle x
 diff(f,x,2)...zweite Ableitung von f an der Stelle x
 diff(f,x,n)...n-te Ableitung von f an der Stelle x
@@ -110,9 +142,8 @@ rand(a,b).....Zufallszahl aus dem Intervall [a,b)
 inv(f,x)......Umkehrfunktion f^(-1)(x)
 inv(f,x,a,b)..f^(-1)(x) für f definiert auf [a,b]
 
-<b>Hilfsfunktionen</b>
-list(a1,...,an), [a1,...,an]
-..............Zusammenfassung der Werte zu einer Liste
+<b id="Hilfsfunktionen">Hilfsfunktionen</b>
+[a1,...,an]...Zusammenfassung der Werte zu einer Liste
 get(a,i)......das i-te Element aus der Liste a
 size(a).......Anzahl der Elemente von a
 cat(a,b)......verbindet die Listen a und b
@@ -141,8 +172,9 @@ if(c,a,b).....wenn c, dann a, sonst b
 not(a)........logische Negation
 clamp(x,a,b)..min(max(x,a),b)
 sma(f,x,n,h)..zentraler gleitender Mittelwert
+cprod(a,b)....kartesisches Produkt der Listen a und b
 
-<b>Gamma und Verwandte</b>
+<b id="Gamma">Gamma und Verwandte</b>
 fac(x)........Fakultät
 gamma(x)......Gamma-Funktion
 digamma(x)....Digamma-Funktion
@@ -155,14 +187,14 @@ I(x,a,b)......B(x,a,b)/B(a,b)
 G(x)..........barnessche G-Funktion
 hyperK(x).....K-Funktion
 
-<b>Kombinatorische</b>
+<b id="Kombinatorische">Kombinatorische</b>
 bc(n,k).......Binomialkoeffizient
 ff(n,k).......fallende Faktorielle
 rf(n,k).......steigende Faktorielle
 s1(n,k).......Stirling-Zahl der ersten Art
 s2(n,k).......Stirling-Zahl der zweiten Art
 
-<b>Elliptische Integrale</b>
+<b id="Elliptische-Integrale">Elliptische Integrale</b>
 K(m)..........vollständiges elliptisches Integral K(m=k^2)
 E(m)..........vollständiges elliptisches Integral E(m=k^2)
 F(phi,m)......unvollständiges elliptisches Integral F(phi,m=k^2)
@@ -175,7 +207,7 @@ RD(x,y,z).....Kurzform für RJ(x,y,z,z)
 agm(a,b)......arithmetisch-geometrisches Mittel
 magm(a,b).....modifiziertes arithmetisch-geometrisches Mittel
 
-<b>Integralfunktionen</b>
+<b id="Integralfunktionen">Integralfunktionen</b>
 Ei(x).........Integral-Exponentialfunktion
 En(n,x).......Integral-Exponentialfunktion E[n](x)
 li(x).........Integral-Logarithmus
@@ -183,7 +215,7 @@ Li(x).........um li(2) versetzter Integral-Logarithmus
 Si(x).........Integral-Sinus
 Ci(x).........Integral-Kosinus
 
-<b>Bessel-Funktionen und Verwandte</b>
+<b id="Bessel">Bessel-Funktionen und Verwandte</b>
 BJ(a,x).......Bessel-Funktion J[a](x)
 BY(a,x).......Bessel-Funktion Y[a](x)
 Bj(a,x).......sphärische Bessel-Funktion j[a](x)
@@ -193,13 +225,13 @@ BK(a,x).......modifizierte Bessel-Funktion K[a](x)
 Ai(x).........Airy-Funktion Ai(x)
 Bi(x).........Airy-Funktion Bi(x)
 
-<b>Hypergeometrische Funktionen</b>
+<b id="Hypergeometrische">Hypergeometrische Funktionen</b>
 F([a1,...,am],[b1,...,bn],x)
 ..............hypergeometrische Funktion
 M(a,b,x)......konfluente hypergeometrische Funktion M(a,b,x)
 U(a,b,x)......konfluente hypergeometrische Funktion U(a,b,x)
 
-<b>Zeta und Verwandte</b>
+<b id="Zeta">Zeta und Verwandte</b>
 zeta(s).......Zeta-Funktion
 zeta(s,a).....hurzwitzsche Zeta-Funktion
 Phi(x,s,a)....lerchsche Zeta-Funktion
@@ -207,14 +239,14 @@ Li(s,x).......Polylogarithmus Li[s](x)
 B(k)..........Bernoulli-Zahl, B(1)=+1/2
 Bm(k).........Bernoulli-Zahl, Bm(1)=-1/2
 
-<b>Polynomfunktionen</b>
+<b id="Polynomfunktionen">Polynomfunktionen</b>
 PP(n,a,x).....Legendre-Polynom P[n,a](x)
 PL(n,a,x).....Laguerre-Polynom L[n,a](x)
 PH(n,x).......Hermite-Polynom H[n](x)
 PT(n,x).......Tschebyschow-Polynom T[n](x)
 PU(n,x).......Tschebyschow-Polynom U[n](x)
 
-<b>Fourier-Analysis</b>
+<b id="Fourier">Fourier-Analysis</b>
 fa(f,i,j).....Fourier-Koeffizienten a[i] bis a[j]
 fb(f,i,j).....Fourier-Koeffizienten b[i] bis b[j]
 fs(x,a0,a,b)..Fourier-Reihe, a=[a1,a2,...], b=[b1,b2,...]
@@ -223,7 +255,7 @@ Fs(f,x).......Sinus-Transformation, x in Hz
 Fc(f,x).......Kosinus-Transformation, x in Hz
 comb(x,a,p)...Dirac-Kamm der Schärfe a und Periode p
 
-<b>Funktionalanalysis</b>
+<b id="Funktionalanalysis">Funktionalanalysis</b>
 sinc(x).......Kardinalsinus: sin(pi*x)/(pi*x)
 delta(x,a)....Nadel-Impuls
 L(f,x)........Laplace-Transformation
@@ -232,22 +264,23 @@ D(f,x,r)......fraktionale Ableitung (D^r)(f)(x)
 J(f,a,x,r)....Riemann-Liouville-Integral (J[a]^r)(f)(x)
 J2(f,a,x,r)...Riemann-Liouville-Integral, alternativer Algorithmus
 
-<b>Sonstige</b>
+<b id="Sonstige">Sonstige</b>
 W(x)..........Lambert-W-Funktion, oberer Ast
 Wm1(x)........Lambert-W-Funktion, unterer Ast
 
-<b>Zahlentheorie</b>
+<b id="Zahlentheorie">Zahlentheorie</b>
 pm(x,n,m).....modulare Potenz
 gcd(a,b)......größter gemeinsamer Teiler
 lcm(a,b)......kleinstes gemeinsames Vielfaches
 isprime(n)....Primzahltest
+primes(m,n)...Liste der Primzahlen zwischen m und n
 factor(n).....Primfaktorzerlegung
 pcf(n)........Primzahlfunktion pi(n)
 phi(n)........eulersche Phi-Funktion
 lambda(n).....Carmichael-Funktion
 sigma(n,k)....Teilerfunktion sigma[k](n)
 
-<b>Statistik</b>
+<b id="Statistik">Statistik</b>
 erf(x)........Fehlerfunktion
 norm(x).......kumulierte Standardnormalverteilung
 mean(a).......arithmetisches Mittel der Elemente aus a
@@ -284,11 +317,11 @@ pdfBeta(p,q,x)...Beta-Verteilung, PDF
 cdfBeta(p,q,x)...Beta-Verteilung, CDF
 </pre>
 
-<h2 id="KFkt">
+<h2 id="KFunktionen">
 Komplexe Funktionen</h2>
 
 <pre>
-<b>Elementare</b>
+<b id="KElementare">Elementare Funktionen</b>
 re(z).........Realteil
 im(z).........Imaginärteil
 conj(z).......Konjugation
@@ -302,7 +335,7 @@ ln(z).........natürlicher Logarithmus
 lg(z).........dekadischer Logarithmus
 log(z,b)......Logarithmus zur Basis b
 
-<b>Trigonometrische</b>
+<b id="KTrigonometrische">Trigonometrische Funktionen</b>
 sin(z)........Sinus
 cos(z)........Kosinus
 tan(z)........Tangens
@@ -313,7 +346,7 @@ acos(z).......Arkus Kosinus
 atan(z).......Arkus Tangens
 acot(z).......Arkus Kotangens
 
-<b>Hyperbolische</b>
+<b id="KHyperbolische">Hyperbolische Funktionen</b>
 sinh(z).......Sinus Hyperbolicus
 cosh(z).......Kosinus Hyperbolicus
 tanh(z).......Tangens Hyperbolicus
@@ -324,36 +357,36 @@ acosh(z)......Area Kosinus Hyperbolicus
 atanh(z)......Area Tangens Hyperbolicus
 acoth(z)......Area Kotangens Hyperbolicus
 
-<b>Komplexe Analysis</b>
+<b id="KAnalysis">Komplexe Analysis</b>
 diff(f,z).....komplexe Ableitung
 diff(f,z,n)...n-te komplexe Ableitung
 int(f,a,b)....Integral(von a bis b) f(t) dt
 cint(f,g).....Wegintegral(von g(0) bis g(1)) f(z) dz
 vint(f,a).....Wegintegral(von get(a,1) bis get(a,n)) f(z) dz
 
-<b>Gamma und Verwandte</b>
+<b id="KGamma">Gamma und Verwandte</b>
 fac(z)........Fakultät
 gamma(z)......Gamma-Funktion
 digamma(z)....Digamma-Funktion
 gamma(s,z)....untere unvollständige Gamma-Funktion
 Gamma(s,z)....obere unvollständige Gamma-Funktion
 
-<b>Elliptische Integrale</b>
+<b id="KElliptische-Integrale">Elliptische Integrale</b>
 K(m)..........vollständiges elliptisches Integral K(m=k^2)
 E(m)..........vollständiges elliptisches Integral E(m=k^2)
 
-<b>Integralfunktionen</b>
+<b id="KIntegralfunktionen">Integralfunktionen</b>
 erf(z)........Fehlerfunktion
 Ei(z).........Integral-Exponentialfunktion
 En(n,z).......Integral-Exponentialfunktion E[n](x)
 
-<b>Zeta und Verwandte</b>
+<b id="KZeta">Zeta und Verwandte</b>
 zeta(z).......Zeta-Funktion
 zeta(s,a).....hurzwitzsche Zeta-Funktion
 Phi(x,s,a)....lerchsche Zeta-Funktion
 B(k)..........Bernoulli-Zahl
 
-<b>Sonstige</b>
+<b id="KSonstige">Sonstige</b>
 theta1(z,q)...Theta-Funktion theta1(z,q)
 theta2(z,q)...Theta-Funktion theta2(z,q)
 theta3(z,q)...Theta-Funktion theta3(z,q)
@@ -409,17 +442,17 @@ Folgendes ist bei der Syntax zu beachten:
 
 Wenn am Anfang einer Eingabezeile ein Hash (#) steht, dann
 wird die danach folgende Funktion definiert, jedoch nicht
-gezeichnet. Man kann z.B. folgende Eingaben schreiben:
+gezeichnet. Z.B. sind die folgenden Eingaben möglich:
   f(x) = # sin(x)
   g(x) = f(2pi*x)
 
 Die Ableitung der Funktion f an der Stelle x wird mit diff(f,x)
-berechnet. Man kann z.B. schreiben:
+berechnet. Beispiel:
   f(x) = 2x
   g(x) = diff(f,x)
 
 Die Formulierung diff(2x,x) ist jedoch falsch, da 2x ein Term ist
-und keine Funktion. Man muss die Variable x erst binden. Die Syntax
+und keine Funktion. Die Variable x muss gebunden sein. Die Syntax
 dafür ist {x| Term von x}. Zum Term 2x gehört die Funktion {x|2x}.
 Man kann ebenso auch {t|2t} oder {u|2u} schreiben. Die richtige
 Formulierung ist also g(x) = diff({x|2x},x).
@@ -616,7 +649,7 @@ sein soll, fügt man stattdessen die Zeile
 zum Ende der Datei "cplot.js" hinzu.
 
 Zur Liste der vordefinierten Funktionen können leicht weitere
-in Javascript programmierte Funktionen hinzugefügt werden.
+in JavaScript programmierte Funktionen hinzugefügt werden.
 Die Funktionen müssen lediglich in der Tabelle "ftab" aufgeführt
 werden um im Plotter verwendbar zu sein. Z.B. fügt man den
 folgenden Programmtext zur Datei "plot.js" hinzu.
@@ -629,8 +662,8 @@ ftab.p=p;
 <b>Funktionen mit zwei Argumenten</b>
 Will man die Funktion p(x,y)=x*y definieren, so schreibt man
 in der Taschenrechnerzeile p:={x,y|x*y} und betätigt den
-calc-Button. Funktionen mit mehr als zwei Argumenten definiert
-man analog.
+calc-Button. Die Definition von Funktionen mit mehr als zwei
+Argumenten verläuft analog.
 
 Alternativ lässt sich eine Liste zur Definition verwenden.
 Definiere in der Taschenrechnerzeile p:={a|get(a,1)*get(a,2)}.
@@ -649,7 +682,7 @@ Die Gleichung f(x)=0 mit f(x)=e^x+x^3-2x soll gelöst werden. Ein Plot
 zeigt, dass sich die Nullstelle im Intervall [-2,-1] befindet und
 dass die Funktion f auf diesem Intervall injektiv ist. Man kan nun
 die Umkehrfunktion mit g(x)=inv(f,x,-2,-1) zeichnen lassen.
-Die Nullstelle ist dann einfach g(0). Um den Wert zu berechnen gibt
+Die Nullstelle ist dann einfach g(0). Um den Wert zu berechnen, gibt
 man g(0) in die Taschenrechnerzeile ein.
 
 <b>Wertetabellen</b>

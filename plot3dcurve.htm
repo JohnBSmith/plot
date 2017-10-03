@@ -8,14 +8,14 @@
   <script src = "eplot.js">
   </script>
   <script>
-plot=plot3d;
+plot=plot3dcurve;
+gv1id="t";
   </script>
   <link rel="stylesheet" href="s1.css">
 </head>
 <body>
 
 <br>
-<br><br>
 <canvas id="canvas1" width="720" height="480"
 style="border: thin solid gray">
 No canvas.
@@ -23,38 +23,42 @@ No canvas.
 
 <div class="nb">
 <input type="button" value="plot"
-onclick="plot3d()">
+onclick="plot()">
 <input type="button" value="&lt;"
-onclick="shiftphim(); plot3d()">
+onclick="shiftphim(); plot()">
 <input type="button" value="&gt;"
-onclick="shiftphip(); plot3d()">
-<input type="button" value="dg"
-onclick="switchdg()">
+onclick="shiftphip(); plot()">
 <input type="button" value="&lt;"
-onclick="shiftam(); plot3d()">
+onclick="shiftam(); plot()">
 <input type="button" value="&gt;"
-onclick="shiftap(); plot3d()">
+onclick="shiftap(); plot()">
 <br><br>
-f(x,y) = <input type="text" id="inputf" style="width: 600px"
-value = "" onkeyup="handle_keys(event);">
+x(t) = <input type="text" id="inputx" style="width: 600px"
+value = "cos(t)" onkeyup="handle_keys(event);">
 <br>
-g(x,y) = <input type="text" id="inputg" style="width: 600px"
-value = "" onkeyup="handle_keys(event);">
+y(t) = <input type="text" id="inputy" style="width: 600px"
+value = "sin(t)" onkeyup="handle_keys(event);">
+<br>
+z(t) = <input type="text" id="inputz" style="width: 600px"
+value = "t" onkeyup="handle_keys(event);">
 <br><br>
-w = <input type="text" id="inputw" value="10"
+h = <input type="text" id="inputw" value="10"
   onkeyup="handle_keys(event);">&emsp;
-a = <input type="text" id="inputa" value="0"
+t1 = <input type="text" id="inputt1" value="0"
   onkeyup="handle_keys(event);"><br>
 m = <input type="text" id="inputm" value="1"
   onkeyup="handle_keys(event);">&emsp;
-d = <input type="text" id="inputd" value="1"
-  onkeyup="handle_keys(event);">
-<br>
+t2 = <input type="text" id="inputt2" value="2pi"
+  onkeyup="handle_keys(event);"><br>
 &phi; = <input type="text" id="inputphi" value="0"
+  onkeyup="handle_keys(event);">&emsp;
+a = <input type="text" id="inputa" value="0"
   onkeyup="handle_keys(event);"><br>
 &theta; = <input type="text" id="inputtheta" value="45"
+  onkeyup="handle_keys(event);">&emsp;
+d = <input type="text" id="inputd" value="1"
   onkeyup="handle_keys(event);"><br>
-n = <input type="text" id="inputn" value="100"
+n = <input type="text" id="inputn" value="1000"
   onkeyup="handle_keys(event);">
 <br><br>
 <a href="doc.htm" class="modest">help</a>
